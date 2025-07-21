@@ -7,7 +7,7 @@ const LanguageSelection = () => {
 
   const languages = [
     "English",
-    "Hindi", 
+    "Tamil", 
     "Telugu",
     "Kannada",
     "Malayalam",
