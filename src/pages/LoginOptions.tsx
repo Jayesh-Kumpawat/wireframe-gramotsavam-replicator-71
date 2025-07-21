@@ -5,8 +5,7 @@ const LoginOptions = () => {
   const navigate = useNavigate();
 
   const handlePlayerLogin = () => {
-    // Navigate to player signup/login
-    console.log("Player Signup/Login selected");
+    navigate("/player-signup");
   };
 
   const handleVolunteerLogin = () => {

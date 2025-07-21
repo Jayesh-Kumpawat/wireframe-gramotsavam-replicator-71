@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import LanguageSelection from "./pages/LanguageSelection";
 import LoginOptions from "./pages/LoginOptions";
+import PlayerSignup from "./pages/PlayerSignup";
+import PlayerOTP from "./pages/PlayerOTP";
+import PlayerDashboard from "./pages/PlayerDashboard";
+import PlayerProfileCreation from "./pages/PlayerProfileCreation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +24,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/language" element={<LanguageSelection />} />
           <Route path="/login" element={<LoginOptions />} />
+          <Route path="/player-signup" element={<PlayerSignup />} />
+          <Route path="/player-otp" element={<PlayerOTP />} />
+          <Route path="/player-dashboard" element={<PlayerDashboard />} />
+          <Route path="/player-profile" element={<PlayerProfileCreation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
