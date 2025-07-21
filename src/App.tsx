@@ -10,6 +10,10 @@ import PlayerSignup from "./pages/PlayerSignup";
 import PlayerOTP from "./pages/PlayerOTP";
 import PlayerDashboard from "./pages/PlayerDashboard";
 import PlayerProfileCreation from "./pages/PlayerProfileCreation";
+import PlayerAddress from "./pages/PlayerAddress";
+import PlayerAadhar from "./pages/PlayerAadhar";
+import PlayerSuccess from "./pages/PlayerSuccess";
+import TeamCreation from "./pages/TeamCreation";
 import VolunteerLogin from "./pages/VolunteerLogin";
 import VolunteerOTP from "./pages/VolunteerOTP";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
@@ -31,6 +35,10 @@ const App = () => (
           <Route path="/player-otp" element={<PlayerOTP />} />
           <Route path="/player-dashboard" element={<PlayerDashboard />} />
           <Route path="/player-profile" element={<PlayerProfileCreation />} />
+          <Route path="/player-address" element={<PlayerAddress />} />
+          <Route path="/player-aadhar" element={<PlayerAadhar />} />
+          <Route path="/player-success" element={<PlayerSuccess />} />
+          <Route path="/team-creation" element={<TeamCreation />} />
           <Route path="/volunteer-login" element={<VolunteerLogin />} />
           <Route path="/volunteer-otp" element={<VolunteerOTP />} />
           <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />

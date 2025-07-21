@@ -11,8 +11,8 @@ const PlayerOTP = () => {
   const [otp, setOTP] = useState("");
 
   const handleContinue = () => {
-    // For now, navigate to dashboard (can be changed based on login/registration logic)
-    navigate("/player-dashboard");
+    // Navigate to profile creation for new users, dashboard for existing users
+    navigate("/player-profile");
   };
 
   const handleResendOTP = () => {
