@@ -10,6 +10,9 @@ import PlayerSignup from "./pages/PlayerSignup";
 import PlayerOTP from "./pages/PlayerOTP";
 import PlayerDashboard from "./pages/PlayerDashboard";
 import PlayerProfileCreation from "./pages/PlayerProfileCreation";
+import VolunteerLogin from "./pages/VolunteerLogin";
+import VolunteerOTP from "./pages/VolunteerOTP";
+import VolunteerDashboard from "./pages/VolunteerDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/player-otp" element={<PlayerOTP />} />
           <Route path="/player-dashboard" element={<PlayerDashboard />} />
           <Route path="/player-profile" element={<PlayerProfileCreation />} />
+          <Route path="/volunteer-login" element={<VolunteerLogin />} />
+          <Route path="/volunteer-otp" element={<VolunteerOTP />} />
+          <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

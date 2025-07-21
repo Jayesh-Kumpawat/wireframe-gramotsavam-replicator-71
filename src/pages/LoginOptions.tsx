@@ -9,8 +9,7 @@ const LoginOptions = () => {
   };
 
   const handleVolunteerLogin = () => {
-    // Navigate to volunteer/admin login
-    console.log("Volunteer/Admin Login selected");
+    navigate("/volunteer-login");
   };
 
   return (
