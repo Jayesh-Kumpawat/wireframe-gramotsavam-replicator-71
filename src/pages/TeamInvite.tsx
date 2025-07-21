@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft, Send } from "lucide-react";
+import { ArrowLeft, Share } from "lucide-react";
 import { useState } from "react";
 
 const TeamInvite = () => {
@@ -9,16 +9,22 @@ const TeamInvite = () => {
   const location = useLocation();
   const { sport, teamData } = location.state || {};
   
-  const [inviteData, setInviteData] = useState({
-    name: "",
-    phone: "",
-    message: "Join my team for Gramotsavam!"
-  });
+  const [teamName, setTeamName] = useState(teamData?.teamName || "");
 
-  const handleSendInvite = () => {
-    // Send invite logic here
-    console.log("Sending invite to:", inviteData);
-    navigate(-1);
+  const handleShareInvitation = () => {
+    console.log("Sharing team invitation");
+  };
+
+  const handleAddManually = () => {
+    navigate("/team-add-manually", { state: { sport, teamData: { ...teamData, teamName } } });
+  };
+
+  const handleSearch = () => {
+    navigate("/team-search", { state: { sport, teamData: { ...teamData, teamName } } });
+  };
+
+  const handleRegisterTeam = () => {
+    navigate("/player-dashboard");
   };
 
   return (
@@ -35,49 +41,77 @@ const TeamInvite = () => {
           </div>
 
           <h2 className="text-lg font-normal mb-6 text-center">
-            TEAM CREATION - Invite
+            Register Team for<br />{sport || "Throwball"}
           </h2>
           
           <div className="space-y-4">
             <div>
-              <label className="text-xs block mb-1">Player Name</label>
+              <label className="text-xs block mb-1">Team Name</label>
               <Input
-                value={inviteData.name}
-                onChange={(e) => setInviteData({...inviteData, name: e.target.value})}
+                value={teamName}
+                onChange={(e) => setTeamName(e.target.value)}
                 className="w-full h-8 text-sm"
               />
             </div>
 
             <div>
-              <label className="text-xs block mb-1">Phone Number</label>
-              <Input
-                value={inviteData.phone}
-                onChange={(e) => setInviteData({...inviteData, phone: e.target.value})}
-                className="w-full h-8 text-sm"
-              />
+              <label className="text-xs block mb-2">Team Members</label>
+              <div className="border rounded p-2 text-sm">
+                <div>You (Captain)</div>
+                <div className="text-foreground/70">978xxx</div>
+              </div>
             </div>
 
             <div>
-              <label className="text-xs block mb-1">Invitation Message</label>
-              <Input
-                value={inviteData.message}
-                onChange={(e) => setInviteData({...inviteData, message: e.target.value})}
-                className="w-full h-8 text-sm"
-              />
+              <label className="text-xs block mb-2">Add Team Members</label>
+              <div className="flex space-x-2 mb-3">
+                <Button
+                  onClick={handleAddManually}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs"
+                >
+                  Add Manual
+                </Button>
+                <Button
+                  onClick={handleSearch}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs"
+                >
+                  Search
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs bg-blue-100"
+                  disabled
+                >
+                  Invite
+                </Button>
+              </div>
+
+              <Button
+                onClick={handleShareInvitation}
+                variant="outline"
+                className="w-full mb-2"
+              >
+                <Share className="w-4 h-4 mr-2" />
+                Share Team Invitation
+              </Button>
+
+              <p className="text-xs text-foreground/70 text-center">
+                Add a player who doesn't have this app yet
+              </p>
             </div>
 
             <Button
-              onClick={handleSendInvite}
+              onClick={handleRegisterTeam}
               variant="outline"
               className="w-full mt-6"
             >
-              <Send className="w-4 h-4 mr-2" />
-              Send Invite
+              Register Team
             </Button>
-
-            <p className="text-xs text-foreground/70 text-center">
-              An SMS/WhatsApp invite will be sent with app download link
-            </p>
           </div>
         </div>
       </div>

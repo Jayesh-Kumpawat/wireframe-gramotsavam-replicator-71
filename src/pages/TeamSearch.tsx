@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft, Search, User } from "lucide-react";
 import { useState } from "react";
 
 const TeamSearch = () => {
@@ -9,21 +9,26 @@ const TeamSearch = () => {
   const location = useLocation();
   const { sport, teamData } = location.state || {};
   
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("987xxx");
+  const [teamName, setTeamName] = useState(teamData?.teamName || "");
   const [searchResults] = useState([
-    { id: 1, name: "John Doe", phone: "9876543210" },
-    { id: 2, name: "Jane Smith", phone: "9876543211" },
-    { id: 3, name: "Mike Johnson", phone: "9876543212" }
+    { id: 1, name: "John Player", status: "Search for players already registered" }
   ]);
 
   const handleSearch = () => {
-    // Search logic here
     console.log("Searching for:", searchQuery);
   };
 
-  const handleAddPlayer = (player: any) => {
-    // Add player logic here
-    console.log("Adding player:", player);
+  const handleAddManually = () => {
+    navigate("/team-add-manually", { state: { sport, teamData: { ...teamData, teamName } } });
+  };
+
+  const handleInvite = () => {
+    navigate("/team-invite", { state: { sport, teamData: { ...teamData, teamName } } });
+  };
+
+  const handleRegisterTeam = () => {
+    navigate("/player-dashboard");
   };
 
   return (
@@ -40,46 +45,90 @@ const TeamSearch = () => {
           </div>
 
           <h2 className="text-lg font-normal mb-6 text-center">
-            TEAM CREATION - Search
+            Register Team for<br />{sport || "Throwball"}
           </h2>
           
           <div className="space-y-4">
-            <div className="flex space-x-2">
+            <div>
+              <label className="text-xs block mb-1">Team Name</label>
               <Input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search players..."
-                className="flex-1 h-8 text-sm"
+                value={teamName}
+                onChange={(e) => setTeamName(e.target.value)}
+                className="w-full h-8 text-sm"
               />
-              <Button
-                onClick={handleSearch}
-                variant="outline"
-                size="sm"
-                className="px-3"
-              >
-                <Search className="w-4 h-4" />
-              </Button>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs block">Search Results</label>
-              {searchResults.map((player) => (
-                <div key={player.id} className="flex items-center justify-between p-2 border rounded">
-                  <div className="text-sm">
-                    <div className="font-medium">{player.name}</div>
-                    <div className="text-foreground/70">{player.phone}</div>
+            <div>
+              <label className="text-xs block mb-2">Team Members</label>
+              <div className="border rounded p-2 text-sm">
+                <div>You (Captain)</div>
+                <div className="text-foreground/70">978xxx</div>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs block mb-2">Add Team Members</label>
+              <div className="flex space-x-2 mb-3">
+                <Button
+                  onClick={handleAddManually}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs"
+                >
+                  Add Manual
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs bg-blue-100"
+                  disabled
+                >
+                  Search
+                </Button>
+                <Button
+                  onClick={handleInvite}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-xs"
+                >
+                  Invite
+                </Button>
+              </div>
+
+              <div className="flex space-x-2 mb-3">
+                <Input
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 h-8 text-sm"
+                />
+                <Button
+                  onClick={handleSearch}
+                  variant="outline"
+                  size="sm"
+                  className="px-3"
+                >
+                  <Search className="w-4 h-4" />
+                </Button>
+              </div>
+
+              {searchResults.map((result) => (
+                <div key={result.id} className="flex items-center space-x-3 p-2 border rounded mb-2">
+                  <User className="w-4 h-4 text-red-500" />
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">{result.name}</div>
+                    <div className="text-xs text-foreground/70">{result.status}</div>
                   </div>
-                  <Button
-                    onClick={() => handleAddPlayer(player)}
-                    variant="outline"
-                    size="sm"
-                    className="text-xs"
-                  >
-                    Add
-                  </Button>
                 </div>
               ))}
             </div>
+
+            <Button
+              onClick={handleRegisterTeam}
+              variant="outline"
+              className="w-full mt-6"
+            >
+              Register Team
+            </Button>
           </div>
         </div>
       </div>
