@@ -14,6 +14,10 @@ import PlayerAddress from "./pages/PlayerAddress";
 import PlayerAadhar from "./pages/PlayerAadhar";
 import PlayerSuccess from "./pages/PlayerSuccess";
 import TeamCreation from "./pages/TeamCreation";
+import TeamRegister from "./pages/TeamRegister";
+import TeamAddManually from "./pages/TeamAddManually";
+import TeamSearch from "./pages/TeamSearch";
+import TeamInvite from "./pages/TeamInvite";
 import VolunteerLogin from "./pages/VolunteerLogin";
 import VolunteerOTP from "./pages/VolunteerOTP";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
@@ -39,6 +43,10 @@ const App = () => (
           <Route path="/player-aadhar" element={<PlayerAadhar />} />
           <Route path="/player-success" element={<PlayerSuccess />} />
           <Route path="/team-creation" element={<TeamCreation />} />
+          <Route path="/team-register" element={<TeamRegister />} />
+          <Route path="/team-add-manually" element={<TeamAddManually />} />
+          <Route path="/team-search" element={<TeamSearch />} />
+          <Route path="/team-invite" element={<TeamInvite />} />
           <Route path="/volunteer-login" element={<VolunteerLogin />} />
           <Route path="/volunteer-otp" element={<VolunteerOTP />} />
           <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />
