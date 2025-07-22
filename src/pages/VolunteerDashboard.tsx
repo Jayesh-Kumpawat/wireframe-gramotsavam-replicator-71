@@ -40,9 +40,9 @@ const VolunteerDashboard = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-background flex overflow-hidden">
+    <div className="min-h-screen bg-background">
       {/* Left Sidebar */}
-      <div className="w-80 border-r flex flex-col flex-shrink-0 bg-background">
+      <div className="w-80 border-r flex flex-col bg-background">
         <div className="p-6 space-y-6">
           <div>
             <h2 className="text-xl font-bold mb-6">HOME</h2>
@@ -102,11 +102,6 @@ const VolunteerDashboard = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Main Content Area */}
-      <div className="flex-1 bg-background">
-        {/* Content will be added here when navigating to specific sports */}
       </div>
     </div>
   );
