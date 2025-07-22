@@ -19,6 +19,10 @@ const VolunteerTeams = () => {
     division: false,
     finals: false
   });
+  const [selectedStatus, setSelectedStatus] = useState({
+    verified: false,
+    registered: false
+  });
 
   const registeredTeams = [
     { id: 1, name: "Thunder Warriors", sport: "Throwball", level: "Cluster", players: 12, status: "Verified" },
@@ -35,6 +39,10 @@ const VolunteerTeams = () => {
 
   const handleLevelChange = (level: string, checked: boolean) => {
     setSelectedLevels(prev => ({ ...prev, [level]: checked }));
+  };
+
+  const handleStatusChange = (status: string, checked: boolean) => {
+    setSelectedStatus(prev => ({ ...prev, [status]: checked }));
   };
 
   const filteredTeams = registeredTeams
@@ -101,8 +109,13 @@ const VolunteerTeams = () => {
                   </TableHeader>
                   <TableBody>
                     {filteredTeams.map((team) => (
-                      <TableRow key={team.id}>
-                        <TableCell className="font-medium">{team.name}</TableCell>
+                      <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
+                        <TableCell 
+                          className="font-medium text-primary"
+                          onClick={() => navigate(`/team-details/${team.id}`)}
+                        >
+                          {team.name}
+                        </TableCell>
                         <TableCell>{team.level}</TableCell>
                         <TableCell>{team.players}</TableCell>
                         <TableCell>
@@ -141,51 +154,58 @@ const VolunteerTeams = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h4 className="font-medium mb-3">Level</h4>
+                    <h4 className="font-medium mb-3">Status</h4>
                     <div className="space-y-2">
-                      {Object.entries(selectedLevels).map(([level, checked]) => (
-                        <div key={level} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={level}
-                            checked={checked}
-                            onCheckedChange={(checked) => handleLevelChange(level, checked as boolean)}
-                          />
-                          <label 
-                            htmlFor={level} 
-                            className="text-sm capitalize cursor-pointer"
-                          >
-                            {level}
-                          </label>
-                        </div>
-                      ))}
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="verified"
+                          checked={selectedStatus.verified}
+                          onCheckedChange={(checked) => handleStatusChange("verified", checked as boolean)}
+                        />
+                        <label htmlFor="verified" className="text-sm cursor-pointer">
+                          Verified
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="registered"
+                          checked={selectedStatus.registered}
+                          onCheckedChange={(checked) => handleStatusChange("registered", checked as boolean)}
+                        />
+                        <label htmlFor="registered" className="text-sm cursor-pointer">
+                          Registered
+                        </label>
+                      </div>
                     </div>
                   </div>
-                  
+
                   <div>
-                    <h4 className="font-medium mb-3">Position</h4>
+                    <h4 className="font-medium mb-3">Age</h4>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select position" />
+                        <SelectValue placeholder="Select age group" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Positions</SelectItem>
-                        <SelectItem value="captain">Captain</SelectItem>
-                        <SelectItem value="player">Player</SelectItem>
+                        <SelectItem value="all">All Ages</SelectItem>
+                        <SelectItem value="18-25">18-25</SelectItem>
+                        <SelectItem value="26-35">26-35</SelectItem>
+                        <SelectItem value="36-45">36-45</SelectItem>
+                        <SelectItem value="45+">45+</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <h4 className="font-medium mb-3">Status</h4>
+                    <h4 className="font-medium mb-3">Documents</h4>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select status" />
+                        <SelectValue placeholder="Select document status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Status</SelectItem>
-                        <SelectItem value="verified">Verified</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
+                        <SelectItem value="all">All Documents</SelectItem>
+                        <SelectItem value="complete">Complete</SelectItem>
+                        <SelectItem value="incomplete">Incomplete</SelectItem>
+                        <SelectItem value="pending">Pending Review</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
