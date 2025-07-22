@@ -1,0 +1,202 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft, Search, Filter, X } from "lucide-react";
+import { useState } from "react";
+
+const VolunteerTeams = () => {
+  const navigate = useNavigate();
+  const { sport } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedLevels, setSelectedLevels] = useState({
+    cluster: false,
+    division: false,
+    finals: false
+  });
+
+  const registeredTeams = [
+    { id: 1, name: "Thunder Warriors", sport: "Throwball", level: "Cluster", players: 12, status: "Verified" },
+    { id: 2, name: "Lightning Bolts", sport: "Throwball", level: "Division", players: 11, status: "Pending" },
+    { id: 3, name: "Storm Riders", sport: "Throwball", level: "Finals", players: 13, status: "Verified" },
+    { id: 4, name: "Wind Runners", sport: "Throwball", level: "Cluster", players: 10, status: "Verified" },
+    { id: 5, name: "Spike Masters", sport: "Volleyball", level: "Cluster", players: 14, status: "Verified" },
+    { id: 6, name: "Net Warriors", sport: "Volleyball", level: "Division", players: 12, status: "Pending" },
+    { id: 7, name: "Shuttle Pros", sport: "Badminton", level: "Finals", players: 8, status: "Verified" },
+    { id: 8, name: "Court Kings", sport: "Badminton", level: "Cluster", players: 10, status: "Verified" },
+    { id: 9, name: "Chase Masters", sport: "Kho-Kho", level: "Division", players: 15, status: "Verified" },
+    { id: 10, name: "Tag Champions", sport: "Kho-Kho", level: "Finals", players: 14, status: "Pending" }
+  ];
+
+  const handleLevelChange = (level: string, checked: boolean) => {
+    setSelectedLevels(prev => ({ ...prev, [level]: checked }));
+  };
+
+  const filteredTeams = registeredTeams
+    .filter(team => 
+      team.sport.toLowerCase() === sport?.toLowerCase() &&
+      team.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (Object.values(selectedLevels).every(v => !v) || 
+       selectedLevels[team.level.toLowerCase() as keyof typeof selectedLevels])
+    );
+
+  const sportName = sport?.charAt(0).toUpperCase() + sport?.slice(1) || "";
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="border-b p-4 flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/volunteer-dashboard")}
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+        <h1 className="text-2xl font-bold">Teams Registered - {sportName}</h1>
+      </div>
+
+      <div className="p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Teams Table */}
+          <div className={showFilters ? "lg:col-span-2" : "lg:col-span-3"}>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Teams - {sportName}</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
+                      <Input
+                        placeholder="Search teams..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => setShowFilters(!showFilters)}
+                    >
+                      <Filter className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Team Name</TableHead>
+                      <TableHead>Level</TableHead>
+                      <TableHead>Players</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredTeams.map((team) => (
+                      <TableRow key={team.id}>
+                        <TableCell className="font-medium">{team.name}</TableCell>
+                        <TableCell>{team.level}</TableCell>
+                        <TableCell>{team.players}</TableCell>
+                        <TableCell>
+                          <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
+                            {team.status}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                {filteredTeams.length === 0 && (
+                  <div className="text-center py-8 text-muted-foreground">
+                    No teams found for {sportName}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Filters Panel */}
+          {showFilters && (
+            <div className="lg:col-span-1">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Filters</CardTitle>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShowFilters(false)}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="font-medium mb-3">Level</h4>
+                    <div className="space-y-2">
+                      {Object.entries(selectedLevels).map(([level, checked]) => (
+                        <div key={level} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={level}
+                            checked={checked}
+                            onCheckedChange={(checked) => handleLevelChange(level, checked as boolean)}
+                          />
+                          <label 
+                            htmlFor={level} 
+                            className="text-sm capitalize cursor-pointer"
+                          >
+                            {level}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium mb-3">Position</h4>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select position" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Positions</SelectItem>
+                        <SelectItem value="captain">Captain</SelectItem>
+                        <SelectItem value="player">Player</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-3">Status</h4>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Status</SelectItem>
+                        <SelectItem value="verified">Verified</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="rejected">Rejected</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VolunteerTeams;

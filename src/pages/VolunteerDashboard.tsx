@@ -68,9 +68,9 @@ const VolunteerDashboard = () => {
                 {sports.map((sport) => (
                   <Button
                     key={sport}
-                    variant={selectedSport === sport ? "default" : "outline"}
+                    variant="outline"
                     className="w-full justify-start"
-                    onClick={() => setSelectedSport(sport)}
+                    onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
                   >
                     {sport}
                   </Button>
@@ -107,160 +107,9 @@ const VolunteerDashboard = () => {
 
         {/* Main Content */}
         <div className="flex-1 p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Notifications */}
-            <div className="lg:col-span-2">
-              <Card className="mb-6">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Bell className="w-5 h-5" />
-                    POC Notifications
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {notifications.map((notification) => (
-                      <div key={notification.id} className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <div>
-                          <p className="font-medium">{notification.title}</p>
-                          <p className="text-sm text-muted-foreground">{notification.sport} • {notification.time}</p>
-                        </div>
-                        <Badge variant="outline">{notification.sport}</Badge>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Teams Table */}
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>Teams Registered - {selectedSport}</CardTitle>
-                    <div className="flex items-center gap-2">
-                      <div className="relative">
-                        <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
-                        <Input
-                          placeholder="Search..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          className="pl-10"
-                        />
-                      </div>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => setShowFilters(!showFilters)}
-                      >
-                        <Filter className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Team Name</TableHead>
-                        <TableHead>Level</TableHead>
-                        <TableHead>Players</TableHead>
-                        <TableHead>Status</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {registeredTeams
-                        .filter(team => 
-                          team.sport === selectedSport &&
-                          team.name.toLowerCase().includes(searchQuery.toLowerCase())
-                        )
-                        .map((team) => (
-                        <TableRow key={team.id}>
-                          <TableCell className="font-medium">{team.name}</TableCell>
-                          <TableCell>{team.level}</TableCell>
-                          <TableCell>{team.players}</TableCell>
-                          <TableCell>
-                            <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
-                              {team.status}
-                            </Badge>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Filters Panel */}
-            {showFilters && (
-              <div className="lg:col-span-1">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle>Filters</CardTitle>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setShowFilters(false)}
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-medium mb-3">Level</h4>
-                      <div className="space-y-2">
-                        {Object.entries(selectedLevels).map(([level, checked]) => (
-                          <div key={level} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={level}
-                              checked={checked}
-                              onCheckedChange={(checked) => handleLevelChange(level, checked as boolean)}
-                            />
-                            <label 
-                              htmlFor={level} 
-                              className="text-sm capitalize cursor-pointer"
-                            >
-                              {level}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-medium mb-3">Position</h4>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select position" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Positions</SelectItem>
-                          <SelectItem value="captain">Captain</SelectItem>
-                          <SelectItem value="player">Player</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <h4 className="font-medium mb-3">Status</h4>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Status</SelectItem>
-                          <SelectItem value="verified">Verified</SelectItem>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="rejected">Rejected</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
+          <div className="text-center py-20">
+            <h2 className="text-xl font-semibold mb-4">Welcome to POC Dashboard</h2>
+            <p className="text-muted-foreground">Select a sport from the sidebar to view registered teams</p>
           </div>
         </div>
       </div>

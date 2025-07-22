@@ -29,6 +29,7 @@ import TeamInvite from "./pages/TeamInvite";
 import VolunteerLogin from "./pages/VolunteerLogin";
 import VolunteerOTP from "./pages/VolunteerOTP";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
+import VolunteerTeams from "./pages/VolunteerTeams";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ const App = () => (
           <Route path="/volunteer-login" element={<VolunteerLogin />} />
           <Route path="/volunteer-otp" element={<VolunteerOTP />} />
           <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />
+          <Route path="/volunteer-teams/:sport" element={<VolunteerTeams />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
