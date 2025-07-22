@@ -30,6 +30,8 @@ import VolunteerLogin from "./pages/VolunteerLogin";
 import VolunteerOTP from "./pages/VolunteerOTP";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
 import VolunteerMatches from "./pages/VolunteerMatches";
+import VolunteerProfile from "./pages/VolunteerProfile";
+import VolunteerNotifications from "./pages/VolunteerNotifications";
 import MatchDetails from "./pages/MatchDetails";
 import CreateMatch from "./pages/CreateMatch";
 import VolunteerTeams from "./pages/VolunteerTeams";
@@ -72,6 +74,8 @@ const App = () => (
           <Route path="/volunteer-otp" element={<VolunteerOTP />} />
           <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
+          <Route path="/volunteer-profile" element={<VolunteerProfile />} />
+          <Route path="/volunteer-notifications" element={<VolunteerNotifications />} />
           <Route path="/match-details/:matchId" element={<MatchDetails />} />
           <Route path="/create-match" element={<CreateMatch />} />
           <Route path="/volunteer-teams/:sport" element={<VolunteerTeams />} />

@@ -50,7 +50,10 @@ const VolunteerDashboard = () => {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
-                <div className="relative">
+                <div 
+                  className="relative cursor-pointer"
+                  onClick={() => navigate("/volunteer-notifications")}
+                >
                   <Bell className="w-5 h-5" />
                   <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
                     1
@@ -96,7 +99,10 @@ const VolunteerDashboard = () => {
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
               </div>
-              <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
+              <div 
+                className="flex-1 flex flex-col items-center py-4 cursor-pointer"
+                onClick={() => navigate("/volunteer-profile")}
+              >
                 <UserCircle className="w-6 h-6" />
                 <span className="text-sm mt-1">Profile</span>
               </div>
