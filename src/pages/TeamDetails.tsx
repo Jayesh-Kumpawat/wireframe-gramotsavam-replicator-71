@@ -2,14 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, User, Settings } from "lucide-react";
+import { ArrowLeft, User, Settings, Eye } from "lucide-react";
 import { useState } from "react";
 
 const TeamDetails = () => {
   const navigate = useNavigate();
   const { teamId } = useParams();
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const [statusFilters, setStatusFilters] = useState({ verified: false, registered: false });
+  const [ageFilter, setAgeFilter] = useState("");
+  const [documentsFilter, setDocumentsFilter] = useState("");
 
   // Mock team data
   const team = {
@@ -86,7 +92,74 @@ const TeamDetails = () => {
                 <CardTitle>Players</CardTitle>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground">Player Name | Captain | Status | Others</span>
-                  <Settings className="w-4 h-4" />
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <Settings className="w-4 h-4" />
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetTitle>Filters</SheetTitle>
+                      </SheetHeader>
+                      <div className="mt-6 space-y-6">
+                        <div>
+                          <h4 className="font-medium mb-3">Status</h4>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="verified" 
+                                checked={statusFilters.verified}
+                                onCheckedChange={(checked) => 
+                                  setStatusFilters(prev => ({ ...prev, verified: checked as boolean }))
+                                }
+                              />
+                              <label htmlFor="verified" className="text-sm">Verified</label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="registered" 
+                                checked={statusFilters.registered}
+                                onCheckedChange={(checked) => 
+                                  setStatusFilters(prev => ({ ...prev, registered: checked as boolean }))
+                                }
+                              />
+                              <label htmlFor="registered" className="text-sm">Registered</label>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-medium mb-3">Age</h4>
+                          <Select value={ageFilter} onValueChange={setAgeFilter}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select age range" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="18-25">18-25</SelectItem>
+                              <SelectItem value="26-35">26-35</SelectItem>
+                              <SelectItem value="36-45">36-45</SelectItem>
+                              <SelectItem value="46+">46+</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-medium mb-3">Documents</h4>
+                          <Select value={documentsFilter} onValueChange={setDocumentsFilter}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select document status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="complete">Complete</SelectItem>
+                              <SelectItem value="incomplete">Incomplete</SelectItem>
+                              <SelectItem value="pending">Pending Review</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
                 </div>
               </div>
             </CardHeader>
@@ -98,6 +171,7 @@ const TeamDetails = () => {
                     <TableHead>Player Name</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Position</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -126,6 +200,15 @@ const TeamDetails = () => {
                         </Badge>
                       </TableCell>
                       <TableCell>{player.position}</TableCell>
+                      <TableCell>
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => navigate("/player-profile-view")}
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
