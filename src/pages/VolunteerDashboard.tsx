@@ -41,59 +41,65 @@ const VolunteerDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-
-      <div className="flex flex-1">
+      <div className="flex h-screen">
         {/* Left Sidebar */}
-        <div className="w-80 border-r p-6 space-y-6">
-          <div>
-            <h2 className="text-lg font-semibold mb-4">HOME</h2>
-            
-            <Card className="mb-4">
-              <CardHeader>
-                <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
-                <Badge variant="destructive" className="w-fit">1</Badge>
-              </CardHeader>
-            </Card>
+        <div className="w-64 border-r flex flex-col">
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+            <div>
+              <h2 className="text-lg font-semibold mb-3">HOME</h2>
+              
+              <Card className="mb-3">
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Bell className="w-4 h-4" />
+                      <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
+                    </div>
+                    <Badge variant="destructive" className="w-fit">1</Badge>
+                  </div>
+                </CardHeader>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-sm">Registered Teams</CardTitle>
-                <p className="text-xs text-muted-foreground">Select Sport</p>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {sports.map((sport) => (
-                  <Button
-                    key={sport}
-                    variant="outline"
-                    className="w-full justify-start"
-                    onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
-                  >
-                    {sport}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm">Registered Teams</CardTitle>
+                  <p className="text-xs text-muted-foreground">Select Sport</p>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {sports.map((sport) => (
+                    <Button
+                      key={sport}
+                      variant="outline"
+                      className="w-full justify-start text-sm"
+                      onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
+                    >
+                      {sport}
+                    </Button>
+                  ))}
+                  <Button variant="secondary" className="w-full mt-3 text-sm">
+                    Register New Team
                   </Button>
-                ))}
-                <Button variant="secondary" className="w-full mt-4">
-                  Register New Team
-                </Button>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Bottom Navigation */}
-          <div className="flex justify-center space-x-8 pt-4 border-t">
+          <div className="flex justify-center space-x-6 p-4 border-t">
             <div className="flex flex-col items-center">
-              <Home className="w-6 h-6 text-primary cursor-pointer" />
+              <Home className="w-5 h-5 text-primary cursor-pointer" />
               <span className="text-xs mt-1 text-primary">Home</span>
             </div>
             <div className="flex flex-col items-center">
               <Trophy 
-                className="w-6 h-6 cursor-pointer" 
+                className="w-5 h-5 cursor-pointer" 
                 onClick={() => navigate("/player-matches")}
               />
               <span className="text-xs mt-1">Matches</span>
             </div>
             <div className="flex flex-col items-center">
               <UserCircle 
-                className="w-6 h-6 cursor-pointer" 
+                className="w-5 h-5 cursor-pointer" 
                 onClick={() => navigate("/player-profile-view")}
               />
               <span className="text-xs mt-1">Profile</span>
