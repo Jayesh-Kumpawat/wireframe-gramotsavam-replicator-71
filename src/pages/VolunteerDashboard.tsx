@@ -51,11 +51,13 @@ const VolunteerDashboard = () => {
               <Card className="mb-3">
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                    <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
+                    <div className="relative">
                       <Bell className="w-4 h-4" />
-                      <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
+                      <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
+                        1
+                      </Badge>
                     </div>
-                    <Badge variant="destructive" className="w-fit">1</Badge>
                   </div>
                 </CardHeader>
               </Card>
@@ -108,7 +110,13 @@ const VolunteerDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6">
+        <div className="flex-1 p-6 bg-background">
+          <div className="h-full flex items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-xl font-semibold mb-2">Select a sport to view registered teams</h2>
+              <p className="text-muted-foreground">Choose from the sports listed in the sidebar</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
