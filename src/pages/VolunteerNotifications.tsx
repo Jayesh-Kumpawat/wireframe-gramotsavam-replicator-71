@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { Bell, MapPin, Home, Trophy, UserCircle } from "lucide-react";
+import { Bell, MapPin, Home, Trophy, UserCircle, ArrowLeft } from "lucide-react";
 
 const VolunteerNotifications = () => {
   const navigate = useNavigate();
@@ -31,6 +31,14 @@ const VolunteerNotifications = () => {
         <div className="w-80 space-y-4">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => navigate("/volunteer-dashboard")}
+              className="p-2"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
             <Bell className="w-6 h-6" />
             <h2 className="text-xl font-bold">Notifications</h2>
           </div>
