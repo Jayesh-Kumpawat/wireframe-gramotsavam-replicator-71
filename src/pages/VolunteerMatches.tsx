@@ -170,9 +170,6 @@ const VolunteerMatches = () => {
                 </div>
               </DialogContent>
             </Dialog>
-            <Button variant="outline" size="icon">
-              V
-            </Button>
             <Button 
               variant="outline" 
               size="icon"
