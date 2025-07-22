@@ -75,23 +75,25 @@ const MatchDetails = () => {
             <CardHeader className="pb-3">
               <CardTitle className="text-base">{matchData.teamA} Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              {teamAPlayers.map((player) => (
-                <div key={player.id} className="flex items-center justify-between text-sm p-2 border rounded">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{player.name}</span>
-                    <span className="text-muted-foreground">|</span>
-                    <Badge 
-                      variant={player.status === "Verified" ? "default" : "secondary"}
-                      className="text-xs"
-                    >
-                      {player.status}
-                    </Badge>
-                    <span className="text-muted-foreground">|</span>
-                    <span className="text-muted-foreground">{player.others}</span>
+            <CardContent>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {teamAPlayers.map((player) => (
+                  <div key={player.id} className="flex-shrink-0 min-w-[280px] p-3 border rounded-md bg-muted/30">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="font-medium">{player.name}</span>
+                      <span className="text-muted-foreground">|</span>
+                      <Badge 
+                        variant={player.status === "Verified" ? "default" : "secondary"}
+                        className="text-xs"
+                      >
+                        {player.status}
+                      </Badge>
+                      <span className="text-muted-foreground">|</span>
+                      <span className="text-muted-foreground">{player.others}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </CardContent>
           </Card>
 
@@ -100,23 +102,25 @@ const MatchDetails = () => {
             <CardHeader className="pb-3">
               <CardTitle className="text-base">{matchData.teamB} Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              {teamBPlayers.map((player) => (
-                <div key={player.id} className="flex items-center justify-between text-sm p-2 border rounded">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{player.name}</span>
-                    <span className="text-muted-foreground">|</span>
-                    <Badge 
-                      variant={player.status === "Verified" ? "default" : "secondary"}
-                      className="text-xs"
-                    >
-                      {player.status}
-                    </Badge>
-                    <span className="text-muted-foreground">|</span>
-                    <span className="text-muted-foreground">{player.others}</span>
+            <CardContent>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {teamBPlayers.map((player) => (
+                  <div key={player.id} className="flex-shrink-0 min-w-[280px] p-3 border rounded-md bg-muted/30">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="font-medium">{player.name}</span>
+                      <span className="text-muted-foreground">|</span>
+                      <Badge 
+                        variant={player.status === "Verified" ? "default" : "secondary"}
+                        className="text-xs"
+                      >
+                        {player.status}
+                      </Badge>
+                      <span className="text-muted-foreground">|</span>
+                      <span className="text-muted-foreground">{player.others}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </CardContent>
           </Card>
         </div>
