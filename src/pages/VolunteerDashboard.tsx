@@ -49,7 +49,7 @@ const VolunteerDashboard = () => {
           <Card className="mb-6 w-80">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
+                <CardTitle className="text-base">POC Dashboard</CardTitle>
                 <div 
                   className="relative cursor-pointer"
                   onClick={() => navigate("/volunteer-notifications")}
