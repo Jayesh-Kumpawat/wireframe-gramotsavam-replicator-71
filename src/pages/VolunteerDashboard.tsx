@@ -41,10 +41,6 @@ const VolunteerDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b p-4">
-        <h1 className="text-2xl font-bold">POC DASHBOARD</h1>
-      </div>
 
       <div className="flex flex-1">
         {/* Left Sidebar */}
@@ -107,10 +103,6 @@ const VolunteerDashboard = () => {
 
         {/* Main Content */}
         <div className="flex-1 p-6">
-          <div className="text-center py-20">
-            <h2 className="text-xl font-semibold mb-4">Welcome to POC Dashboard</h2>
-            <p className="text-muted-foreground">Select a sport from the sidebar to view registered teams</p>
-          </div>
         </div>
       </div>
     </div>
