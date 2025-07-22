@@ -40,8 +40,8 @@ const VolunteerDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex h-screen">
+    <div className="min-h-screen w-full bg-background">
+      <div className="flex h-screen w-full">
         {/* Left Sidebar */}
         <div className="w-64 border-r flex flex-col">
           <div className="flex-1 p-4 space-y-4 overflow-y-auto">
