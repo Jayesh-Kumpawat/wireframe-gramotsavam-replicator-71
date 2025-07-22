@@ -40,78 +40,76 @@ const VolunteerDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-background">
-      <div className="flex h-screen w-full">
-        {/* Left Sidebar */}
-        <div className="w-64 border-r flex flex-col">
-          <div className="flex-1 p-4 space-y-4 overflow-y-auto">
-            <div>
-              <h2 className="text-lg font-semibold mb-3">HOME</h2>
-              
-              <Card className="mb-3">
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
-                    <div className="relative">
-                      <Bell className="w-4 h-4" />
-                      <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
-                        1
-                      </Badge>
-                    </div>
+    <div className="h-screen w-full bg-background flex">
+      {/* Left Sidebar */}
+      <div className="w-64 border-r flex flex-col flex-shrink-0">
+        <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+          <div>
+            <h2 className="text-lg font-semibold mb-3">HOME</h2>
+            
+            <Card className="mb-3">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm">Volunteer Dashboard</CardTitle>
+                  <div className="relative">
+                    <Bell className="w-4 h-4" />
+                    <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
+                      1
+                    </Badge>
                   </div>
-                </CardHeader>
-              </Card>
+                </div>
+              </CardHeader>
+            </Card>
 
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">Registered Teams</CardTitle>
-                  <p className="text-xs text-muted-foreground">Select Sport</p>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {sports.map((sport) => (
-                    <Button
-                      key={sport}
-                      variant="outline"
-                      className="w-full justify-start text-sm"
-                      onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
-                    >
-                      {sport}
-                    </Button>
-                  ))}
-                  <Button variant="secondary" className="w-full mt-3 text-sm">
-                    Register New Team
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Registered Teams</CardTitle>
+                <p className="text-xs text-muted-foreground">Select Sport</p>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {sports.map((sport) => (
+                  <Button
+                    key={sport}
+                    variant="outline"
+                    className="w-full justify-start text-sm"
+                    onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
+                  >
+                    {sport}
                   </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Bottom Navigation */}
-          <div className="flex justify-center space-x-6 p-4 border-t">
-            <div className="flex flex-col items-center">
-              <Home className="w-5 h-5 text-primary cursor-pointer" />
-              <span className="text-xs mt-1 text-primary">Home</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Trophy 
-                className="w-5 h-5 cursor-pointer" 
-                onClick={() => navigate("/player-matches")}
-              />
-              <span className="text-xs mt-1">Matches</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <UserCircle 
-                className="w-5 h-5 cursor-pointer" 
-                onClick={() => navigate("/player-profile-view")}
-              />
-              <span className="text-xs mt-1">Profile</span>
-            </div>
+                ))}
+                <Button variant="secondary" className="w-full mt-3 text-sm">
+                  Register New Team
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 bg-background">
+        {/* Bottom Navigation */}
+        <div className="flex justify-center space-x-6 p-4 border-t">
+          <div className="flex flex-col items-center">
+            <Home className="w-5 h-5 text-primary cursor-pointer" />
+            <span className="text-xs mt-1 text-primary">Home</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <Trophy 
+              className="w-5 h-5 cursor-pointer" 
+              onClick={() => navigate("/player-matches")}
+            />
+            <span className="text-xs mt-1">Matches</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <UserCircle 
+              className="w-5 h-5 cursor-pointer" 
+              onClick={() => navigate("/player-profile-view")}
+            />
+            <span className="text-xs mt-1">Profile</span>
+          </div>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 bg-background overflow-y-auto">
       </div>
     </div>
   );
