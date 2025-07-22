@@ -89,7 +89,10 @@ const VolunteerDashboard = () => {
                 <Home className="w-6 h-6 text-primary" />
                 <span className="text-sm mt-1 text-primary font-medium">Home</span>
               </div>
-              <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
+              <div 
+                className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
+                onClick={() => navigate("/volunteer-matches")}
+              >
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
               </div>
