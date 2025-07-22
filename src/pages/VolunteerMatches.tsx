@@ -182,7 +182,11 @@ const VolunteerMatches = () => {
           {/* Matches List */}
           <div className="space-y-3">
             {filteredMatches.map((match) => (
-              <Card key={match.id} className="p-4">
+              <Card 
+                key={match.id} 
+                className="p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                onClick={() => navigate(`/match-details/${match.id}`)}
+              >
                 <CardContent className="p-0">
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex-1">
