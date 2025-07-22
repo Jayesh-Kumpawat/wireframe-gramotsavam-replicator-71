@@ -298,34 +298,34 @@ const PlayerProfileEdit = () => {
                         </label>
                       </div>
                     </div>
+
+                    {/* Bottom Navigation inside Address Information */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex justify-center space-x-8">
+                        <div className="flex flex-col items-center">
+                          <Home 
+                            className="w-6 h-6 cursor-pointer" 
+                            onClick={() => navigate("/player-dashboard")}
+                          />
+                          <span className="text-xs mt-1">Home</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <Trophy 
+                            className="w-6 h-6 cursor-pointer" 
+                            onClick={() => navigate("/player-matches")}
+                          />
+                          <span className="text-xs mt-1">Matches</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <UserCircle className="w-6 h-6 text-primary" />
+                          <span className="text-xs mt-1 text-primary">Profile</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
-        <div className="flex justify-center space-x-8">
-          <div className="flex flex-col items-center">
-            <Home 
-              className="w-6 h-6 cursor-pointer" 
-              onClick={() => navigate("/player-dashboard")}
-            />
-            <span className="text-xs mt-1">Home</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <Trophy 
-              className="w-6 h-6 cursor-pointer" 
-              onClick={() => navigate("/player-matches")}
-            />
-            <span className="text-xs mt-1">Matches</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <UserCircle className="w-6 h-6 text-primary" />
-            <span className="text-xs mt-1 text-primary">Profile</span>
           </div>
         </div>
       </div>
