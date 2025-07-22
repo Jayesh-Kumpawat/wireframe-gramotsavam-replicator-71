@@ -24,7 +24,7 @@ const VolunteerProfile = () => {
               <ArrowLeft className="w-5 h-5" />
             </Button>
             <div>
-              <h2 className="text-xl font-bold">POC Profile</h2>
+              <h2 className="text-xl font-bold">Volunteer Profile</h2>
             </div>
           </div>
 
