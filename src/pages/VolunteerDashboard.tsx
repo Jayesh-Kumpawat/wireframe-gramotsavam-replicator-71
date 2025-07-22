@@ -110,13 +110,7 @@ const VolunteerDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6 bg-background">
-          <div className="h-full flex items-center justify-center">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold mb-2">Select a sport to view registered teams</h2>
-              <p className="text-muted-foreground">Choose from the sports listed in the sidebar</p>
-            </div>
-          </div>
+        <div className="flex-1 bg-background">
         </div>
       </div>
     </div>
