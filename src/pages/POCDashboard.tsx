@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Bell, Search, Home, Trophy, UserCircle, Filter, X } from "lucide-react";
 import { useState } from "react";
 
-const VolunteerDashboard = () => {
+const POCDashboard = () => {
   const navigate = useNavigate();
   const [selectedSport, setSelectedSport] = useState("Throwball");
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +49,7 @@ const VolunteerDashboard = () => {
           <Card className="mb-6 w-80">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
+                <CardTitle className="text-base">POC Dashboard</CardTitle>
                 <div 
                   className="relative cursor-pointer"
                   onClick={() => navigate("/volunteer-notifications")}
@@ -94,7 +94,7 @@ const VolunteerDashboard = () => {
               </div>
               <div 
                 className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
-                onClick={() => navigate("/volunteer-matches-simple")}
+                onClick={() => navigate("/volunteer-matches")}
               >
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
@@ -114,4 +114,4 @@ const VolunteerDashboard = () => {
   );
 };
 
-export default VolunteerDashboard;
+export default POCDashboard;
