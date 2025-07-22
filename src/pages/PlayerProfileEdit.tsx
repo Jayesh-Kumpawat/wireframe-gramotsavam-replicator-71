@@ -258,49 +258,49 @@ const PlayerProfileEdit = () => {
                         </SelectContent>
                       </Select>
                     </div>
+
+                    {/* Aadhar Card Front */}
+                    <div>
+                      <label className="text-xs block mb-1">Aadhar Card Front</label>
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => handleFileUpload('front', e)}
+                          className="hidden"
+                          id="aadhar-front"
+                        />
+                        <label htmlFor="aadhar-front" className="cursor-pointer">
+                          <Upload className="w-6 h-6 mx-auto mb-2 text-gray-400" />
+                          <div className="text-xs text-gray-500">
+                            {formData.aadharFiles.front ? formData.aadharFiles.front.name : "Upload"}
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Aadhar Card Back */}
+                    <div>
+                      <label className="text-xs block mb-1">Aadhar Card Back</label>
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => handleFileUpload('back', e)}
+                          className="hidden"
+                          id="aadhar-back"
+                        />
+                        <label htmlFor="aadhar-back" className="cursor-pointer">
+                          <Upload className="w-6 h-6 mx-auto mb-2 text-gray-400" />
+                          <div className="text-xs text-gray-500">
+                            {formData.aadharFiles.back ? formData.aadharFiles.back.name : "Upload"}
+                          </div>
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
-
-              {/* Aadhar Card Front */}
-              <div>
-                <label className="text-xs block mb-1">Aadhar Card Front</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileUpload('front', e)}
-                    className="hidden"
-                    id="aadhar-front"
-                  />
-                  <label htmlFor="aadhar-front" className="cursor-pointer">
-                    <Upload className="w-6 h-6 mx-auto mb-2 text-gray-400" />
-                    <div className="text-xs text-gray-500">
-                      {formData.aadharFiles.front ? formData.aadharFiles.front.name : "Upload"}
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              {/* Aadhar Card Back */}
-              <div>
-                <label className="text-xs block mb-1">Aadhar Card Back</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileUpload('back', e)}
-                    className="hidden"
-                    id="aadhar-back"
-                  />
-                  <label htmlFor="aadhar-back" className="cursor-pointer">
-                    <Upload className="w-6 h-6 mx-auto mb-2 text-gray-400" />
-                    <div className="text-xs text-gray-500">
-                      {formData.aadharFiles.back ? formData.aadharFiles.back.name : "Upload"}
-                    </div>
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
         </div>
