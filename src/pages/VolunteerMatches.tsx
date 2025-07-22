@@ -2,14 +2,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Search, Filter, MapPin, Home, Trophy, UserCircle } from "lucide-react";
+import { ArrowLeft, Search, Filter, MapPin, Home, Trophy, UserCircle, Plus, X } from "lucide-react";
 import { useState } from "react";
 
 const VolunteerMatches = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSport] = useState("Throwball");
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedLevels, setSelectedLevels] = useState({
+    cluster: false,
+    division: false,
+    finals: false
+  });
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   const matches = [
     {
@@ -41,10 +52,21 @@ const VolunteerMatches = () => {
     }
   ];
 
-  const filteredMatches = matches.filter(match =>
-    match.teamA.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    match.teamB.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleLevelChange = (level: string, checked: boolean) => {
+    setSelectedLevels(prev => ({ ...prev, [level]: checked }));
+  };
+
+  const filteredMatches = matches.filter(match => {
+    const matchesSearch = match.teamA.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      match.teamB.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesLevel = Object.keys(selectedLevels).every(level => 
+      !selectedLevels[level as keyof typeof selectedLevels] || 
+      match.level.toLowerCase() === level
+    );
+    
+    return matchesSearch && matchesLevel;
+  });
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -77,11 +99,86 @@ const VolunteerMatches = () => {
                 className="pl-10"
               />
             </div>
-            <Button variant="outline" size="icon">
-              <Filter className="w-4 h-4" />
-            </Button>
+            <Dialog open={showFilters} onOpenChange={setShowFilters}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Filter className="w-4 h-4" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="w-80">
+                <DialogHeader>
+                  <div className="flex items-center justify-between">
+                    <DialogTitle>Filters</DialogTitle>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShowFilters(false)}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </DialogHeader>
+                <div className="space-y-4 pt-4">
+                  {/* Level Filters */}
+                  <div>
+                    <label className="text-sm font-medium mb-3 block">Level</label>
+                    <div className="space-y-2">
+                      {Object.entries(selectedLevels).map(([level, checked]) => (
+                        <div key={level} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={level}
+                            checked={checked}
+                            onCheckedChange={(checked) => handleLevelChange(level, checked as boolean)}
+                          />
+                          <label htmlFor={level} className="text-sm capitalize">
+                            {level}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Date Filter */}
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Date</label>
+                    <Select value={selectedDate} onValueChange={setSelectedDate}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select date range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="today">Today</SelectItem>
+                        <SelectItem value="week">This Week</SelectItem>
+                        <SelectItem value="month">This Month</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Status Filter */}
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Status</label>
+                    <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="scheduled">Scheduled</SelectItem>
+                        <SelectItem value="completed">Completed</SelectItem>
+                        <SelectItem value="cancelled">Cancelled</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
             <Button variant="outline" size="icon">
               V
+            </Button>
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => navigate("/create-match")}
+            >
+              <Plus className="w-4 h-4" />
             </Button>
           </div>
 
