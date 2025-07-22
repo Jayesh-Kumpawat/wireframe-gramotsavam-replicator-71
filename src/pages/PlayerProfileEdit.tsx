@@ -6,11 +6,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, ArrowLeft, Upload, User, Home, Trophy, UserCircle } from "lucide-react";
+import { CalendarIcon, ArrowLeft, Upload, User, Home, Trophy, UserCircle, ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 
 const PlayerProfileEdit = () => {
   const navigate = useNavigate();
+  const [isAddressOpen, setIsAddressOpen] = useState(false);
   
   const [formData, setFormData] = useState({
     fullName: "John Player",
@@ -147,112 +149,118 @@ const PlayerProfileEdit = () => {
                 />
               </div>
 
-              {/* Address Information */}
-              <div className="pt-4">
-                <div className="text-xs font-medium mb-3">Address Information</div>
-                
-                <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div>
-                    <label className="text-xs block mb-1">State</label>
-                    <Select 
-                      value={formData.address.state} 
-                      onValueChange={(value) => setFormData({
-                        ...formData, 
-                        address: {...formData.address, state: value}
-                      })}
-                    >
-                      <SelectTrigger className="w-full h-8 text-sm">
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {states.map((state) => (
-                          <SelectItem key={state} value={state}>{state}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+              {/* Address Information - Collapsible */}
+              <Collapsible open={isAddressOpen} onOpenChange={setIsAddressOpen}>
+                <CollapsibleTrigger className="flex items-center justify-between w-full py-2 border-b border-gray-200">
+                  <span className="text-xs font-medium">Address Information</span>
+                  <ChevronDown className={cn("w-4 h-4 transition-transform", isAddressOpen && "rotate-180")} />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="pt-3">
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs block mb-1">State</label>
+                        <Select 
+                          value={formData.address.state} 
+                          onValueChange={(value) => setFormData({
+                            ...formData, 
+                            address: {...formData.address, state: value}
+                          })}
+                        >
+                          <SelectTrigger className="w-full h-8 text-sm">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {states.map((state) => (
+                              <SelectItem key={state} value={state}>{state}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="text-xs block mb-1">Pincode</label>
+                        <Select 
+                          value={formData.address.pincode} 
+                          onValueChange={(value) => setFormData({
+                            ...formData, 
+                            address: {...formData.address, pincode: value}
+                          })}
+                        >
+                          <SelectTrigger className="w-full h-8 text-sm">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="560001">560001</SelectItem>
+                            <SelectItem value="560002">560002</SelectItem>
+                            <SelectItem value="560003">560003</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs block mb-1">District</label>
+                      <Select 
+                        value={formData.address.district} 
+                        onValueChange={(value) => setFormData({
+                          ...formData, 
+                          address: {...formData.address, district: value}
+                        })}
+                      >
+                        <SelectTrigger className="w-full h-8 text-sm">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {districts.map((district) => (
+                            <SelectItem key={district} value={district}>{district}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs block mb-1">Taluk/Block/Mandal</label>
+                      <Select 
+                        value={formData.address.talukBlockMandal} 
+                        onValueChange={(value) => setFormData({
+                          ...formData, 
+                          address: {...formData.address, talukBlockMandal: value}
+                        })}
+                      >
+                        <SelectTrigger className="w-full h-8 text-sm">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {taluks.map((taluk) => (
+                            <SelectItem key={taluk} value={taluk}>{taluk}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs block mb-1">Panchayat</label>
+                      <Select 
+                        value={formData.address.panchayat} 
+                        onValueChange={(value) => setFormData({
+                          ...formData, 
+                          address: {...formData.address, panchayat: value}
+                        })}
+                      >
+                        <SelectTrigger className="w-full h-8 text-sm">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {panchayats.map((panchayat) => (
+                            <SelectItem key={panchayat} value={panchayat}>{panchayat}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
-                  
-                  <div>
-                    <label className="text-xs block mb-1">Pincode</label>
-                    <Select 
-                      value={formData.address.pincode} 
-                      onValueChange={(value) => setFormData({
-                        ...formData, 
-                        address: {...formData.address, pincode: value}
-                      })}
-                    >
-                      <SelectTrigger className="w-full h-8 text-sm">
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="560001">560001</SelectItem>
-                        <SelectItem value="560002">560002</SelectItem>
-                        <SelectItem value="560003">560003</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="mb-3">
-                  <label className="text-xs block mb-1">District</label>
-                  <Select 
-                    value={formData.address.district} 
-                    onValueChange={(value) => setFormData({
-                      ...formData, 
-                      address: {...formData.address, district: value}
-                    })}
-                  >
-                    <SelectTrigger className="w-full h-8 text-sm">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {districts.map((district) => (
-                        <SelectItem key={district} value={district}>{district}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="mb-3">
-                  <label className="text-xs block mb-1">Taluk/Block/Mandal</label>
-                  <Select 
-                    value={formData.address.talukBlockMandal} 
-                    onValueChange={(value) => setFormData({
-                      ...formData, 
-                      address: {...formData.address, talukBlockMandal: value}
-                    })}
-                  >
-                    <SelectTrigger className="w-full h-8 text-sm">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {taluks.map((taluk) => (
-                        <SelectItem key={taluk} value={taluk}>{taluk}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="mb-4">
-                  <label className="text-xs block mb-1">Panchayat</label>
-                  <Select 
-                    value={formData.address.panchayat} 
-                    onValueChange={(value) => setFormData({
-                      ...formData, 
-                      address: {...formData.address, panchayat: value}
-                    })}
-                  >
-                    <SelectTrigger className="w-full h-8 text-sm">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {panchayats.map((panchayat) => (
-                        <SelectItem key={panchayat} value={panchayat}>{panchayat}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+                </CollapsibleContent>
+              </Collapsible>
 
               {/* Aadhar Card Front */}
               <div>
