@@ -42,11 +42,11 @@ const VolunteerDashboard = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Main Content */}
-      <div className="flex-1 p-6 space-y-6">
-        <div>
+      <div className="flex-1 flex items-center justify-center p-6">
+        <div className="space-y-6">
           <h2 className="text-xl font-bold mb-6">HOME</h2>
           
-          <Card className="mb-6 max-w-md">
+          <Card className="mb-6 w-80">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
@@ -60,7 +60,7 @@ const VolunteerDashboard = () => {
             </CardHeader>
           </Card>
 
-          <Card className="max-w-md">
+          <Card className="w-80">
             <CardHeader className="pb-3">
               <CardTitle className="text-base">Registered Teams</CardTitle>
               <p className="text-sm text-muted-foreground">Select Sport</p>
@@ -81,23 +81,23 @@ const VolunteerDashboard = () => {
               </Button>
             </CardContent>
           </Card>
-        </div>
-      </div>
 
-      {/* Bottom Navigation */}
-      <div className="border-t bg-muted/30">
-        <div className="flex max-w-md">
-          <div className="flex-1 flex flex-col items-center py-4 bg-primary/10 border-r">
-            <Home className="w-6 h-6 text-primary" />
-            <span className="text-sm mt-1 text-primary font-medium">Home</span>
-          </div>
-          <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
-            <Trophy className="w-6 h-6" />
-            <span className="text-sm mt-1">Matches</span>
-          </div>
-          <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
-            <UserCircle className="w-6 h-6" />
-            <span className="text-sm mt-1">Profile</span>
+          {/* Bottom Navigation */}
+          <div className="border-t bg-muted/30 w-80">
+            <div className="flex">
+              <div className="flex-1 flex flex-col items-center py-4 bg-primary/10 border-r">
+                <Home className="w-6 h-6 text-primary" />
+                <span className="text-sm mt-1 text-primary font-medium">Home</span>
+              </div>
+              <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
+                <Trophy className="w-6 h-6" />
+                <span className="text-sm mt-1">Matches</span>
+              </div>
+              <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
+                <UserCircle className="w-6 h-6" />
+                <span className="text-sm mt-1">Profile</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
