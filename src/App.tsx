@@ -13,6 +13,7 @@ import PlayerNotifications from "./pages/PlayerNotifications";
 import PlayerTeamDetails from "./pages/PlayerTeamDetails";
 import PlayerMatches from "./pages/PlayerMatches";
 import PlayerProfileView from "./pages/PlayerProfileView";
+import PlayerProfileEdit from "./pages/PlayerProfileEdit";
 import PlayerProfileCreation from "./pages/PlayerProfileCreation";
 import PlayerAddress from "./pages/PlayerAddress";
 import PlayerAadhar from "./pages/PlayerAadhar";
@@ -45,10 +46,11 @@ const App = () => (
           <Route path="/player-signup" element={<PlayerSignup />} />
           <Route path="/player-otp" element={<PlayerOTP />} />
           <Route path="/player-dashboard" element={<PlayerDashboard />} />
-          <Route path="/player-notifications" element={<PlayerNotifications />} />
-          <Route path="/player-team-details" element={<PlayerTeamDetails />} />
-          <Route path="/player-matches" element={<PlayerMatches />} />
-          <Route path="/player-profile-view" element={<PlayerProfileView />} />
+        <Route path="/player-notifications" element={<PlayerNotifications />} />
+        <Route path="/player-team-details" element={<PlayerTeamDetails />} />
+        <Route path="/player-matches" element={<PlayerMatches />} />
+        <Route path="/player-profile-view" element={<PlayerProfileView />} />
+        <Route path="/player-profile-edit" element={<PlayerProfileEdit />} />
           <Route path="/player-profile" element={<PlayerProfileCreation />} />
           <Route path="/player-address" element={<PlayerAddress />} />
           <Route path="/player-aadhar" element={<PlayerAadhar />} />
