@@ -40,66 +40,64 @@ const VolunteerDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Left Sidebar */}
-      <div className="w-80 border-r flex flex-col bg-background">
-        <div className="p-6 space-y-6">
-          <div>
-            <h2 className="text-xl font-bold mb-6">HOME</h2>
-            
-            <Card className="mb-6">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
-                  <div className="relative">
-                    <Bell className="w-5 h-5" />
-                    <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
-                      1
-                    </Badge>
-                  </div>
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 p-6 space-y-6">
+        <div>
+          <h2 className="text-xl font-bold mb-6">HOME</h2>
+          
+          <Card className="mb-6 max-w-md">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base">Volunteer Dashboard</CardTitle>
+                <div className="relative">
+                  <Bell className="w-5 h-5" />
+                  <Badge variant="destructive" className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs">
+                    1
+                  </Badge>
                 </div>
-              </CardHeader>
-            </Card>
+              </div>
+            </CardHeader>
+          </Card>
 
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base">Registered Teams</CardTitle>
-                <p className="text-sm text-muted-foreground">Select Sport</p>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {sports.map((sport) => (
-                  <Button
-                    key={sport}
-                    variant={sport === "Throwball" ? "destructive" : "outline"}
-                    className="w-full justify-start text-base py-3"
-                    onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
-                  >
-                    {sport}
-                  </Button>
-                ))}
-                <Button variant="secondary" className="w-full mt-4 text-base py-3">
-                  Register New Team
+          <Card className="max-w-md">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Registered Teams</CardTitle>
+              <p className="text-sm text-muted-foreground">Select Sport</p>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {sports.map((sport) => (
+                <Button
+                  key={sport}
+                  variant={sport === "Throwball" ? "destructive" : "outline"}
+                  className="w-full justify-start text-base py-3"
+                  onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
+                >
+                  {sport}
                 </Button>
-              </CardContent>
-            </Card>
-          </div>
+              ))}
+              <Button variant="secondary" className="w-full mt-4 text-base py-3">
+                Register New Team
+              </Button>
+            </CardContent>
+          </Card>
         </div>
+      </div>
 
-        {/* Bottom Navigation */}
-        <div className="mt-auto border-t bg-muted/30">
-          <div className="flex">
-            <div className="flex-1 flex flex-col items-center py-4 bg-primary/10 border-r">
-              <Home className="w-6 h-6 text-primary" />
-              <span className="text-sm mt-1 text-primary font-medium">Home</span>
-            </div>
-            <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
-              <Trophy className="w-6 h-6" />
-              <span className="text-sm mt-1">Matches</span>
-            </div>
-            <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
-              <UserCircle className="w-6 h-6" />
-              <span className="text-sm mt-1">Profile</span>
-            </div>
+      {/* Bottom Navigation */}
+      <div className="border-t bg-muted/30">
+        <div className="flex max-w-md">
+          <div className="flex-1 flex flex-col items-center py-4 bg-primary/10 border-r">
+            <Home className="w-6 h-6 text-primary" />
+            <span className="text-sm mt-1 text-primary font-medium">Home</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
+            <Trophy className="w-6 h-6" />
+            <span className="text-sm mt-1">Matches</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
+            <UserCircle className="w-6 h-6" />
+            <span className="text-sm mt-1">Profile</span>
           </div>
         </div>
       </div>
