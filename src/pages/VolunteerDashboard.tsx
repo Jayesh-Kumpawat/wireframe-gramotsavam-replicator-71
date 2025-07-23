@@ -79,7 +79,11 @@ const VolunteerDashboard = () => {
                   {sport}
                 </Button>
               ))}
-              <Button variant="secondary" className="w-full mt-4 text-base py-3">
+              <Button 
+                variant="secondary" 
+                className="w-full mt-4 text-base py-3"
+                onClick={() => navigate("/volunteer-team-creation")}
+              >
                 Register New Team
               </Button>
             </CardContent>

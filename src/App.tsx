@@ -36,6 +36,7 @@ import MatchDetails from "./pages/MatchDetails";
 import CreateMatch from "./pages/CreateMatch";
 import VolunteerTeams from "./pages/VolunteerTeams";
 import VolunteerMatchesSimple from "./pages/VolunteerMatchesSimple";
+import VolunteerTeamCreation from "./pages/VolunteerTeamCreation";
 import POCDashboard from "./pages/POCDashboard";
 import TeamDetails from "./pages/TeamDetails";
 import NotFound from "./pages/NotFound";
@@ -77,7 +78,8 @@ const App = () => (
           <Route path="/volunteer-dashboard" element={<VolunteerDashboard />} />
           <Route path="/poc-dashboard" element={<POCDashboard />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
-          <Route path="/volunteer-matches-simple" element={<VolunteerMatchesSimple />} />
+        <Route path="/volunteer-matches-simple" element={<VolunteerMatchesSimple />} />
+        <Route path="/volunteer-team-creation" element={<VolunteerTeamCreation />} />
           <Route path="/volunteer-profile" element={<VolunteerProfile />} />
           <Route path="/volunteer-notifications" element={<VolunteerNotifications />} />
           <Route path="/match-details/:matchId" element={<MatchDetails />} />
