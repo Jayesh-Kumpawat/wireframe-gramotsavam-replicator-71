@@ -8,11 +8,20 @@ const TeamRegister = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const sport = location.state?.sport || "Throwball";
+  const isVolunteer = location.state?.isVolunteer || false;
+  const captainDetails = location.state?.captainDetails;
+  
+  const getCaptainDisplayName = () => {
+    if (isVolunteer && captainDetails?.name) {
+      return `${captainDetails.name} (Captain)`;
+    }
+    return "You (Captain)";
+  };
   
   const [teamData, setTeamData] = useState({
     teamName: "",
     members: [
-      { name: "You (Captain)", id: "captain" },
+      { name: getCaptainDisplayName(), id: "captain" },
       { name: "ST2...", id: "member1" }
     ]
   });
@@ -30,7 +39,11 @@ const TeamRegister = () => {
   };
 
   const handleRegisterTeam = () => {
-    navigate("/player-dashboard");
+    if (isVolunteer) {
+      navigate("/volunteer-dashboard");
+    } else {
+      navigate("/player-dashboard");
+    }
   };
 
   return (
