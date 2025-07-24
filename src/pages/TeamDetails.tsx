@@ -27,6 +27,8 @@ const TeamDetails = () => {
     name: "Team 2",
     sport: "Throwball",
     level: "Division",
+    cluster: "North Zone",
+    division: "A Division", // Can be null for cluster level teams
     status: "Verified",
     captain: "Player 1"
   };
@@ -85,9 +87,19 @@ const TeamDetails = () => {
                 <span>{team.sport}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium">Level:</span>
+                <span className="font-medium">Current Level:</span>
                 <span>{team.level}</span>
               </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Cluster:</span>
+                <span>{team.cluster}</span>
+              </div>
+              {team.division && (
+                <div className="flex justify-between">
+                  <span className="font-medium">Division:</span>
+                  <span>{team.division}</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span className="font-medium">Status:</span>
                 <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
