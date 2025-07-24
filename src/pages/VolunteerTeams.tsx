@@ -15,10 +15,16 @@ const VolunteerTeams = () => {
   } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedLevels, setSelectedLevels] = useState({
-    cluster: false,
-    division: false,
-    finals: false
+  const [selectedClusters, setSelectedClusters] = useState({
+    tiruppur: false,
+    alandurai: false,
+    coimbatore: false,
+    erode: false
+  });
+  const [selectedDivisions, setSelectedDivisions] = useState({
+    coimbatore: false,
+    tiruppur: false,
+    salem: false
   });
   const [selectedStatus, setSelectedStatus] = useState({
     verified: false,
@@ -28,86 +34,110 @@ const VolunteerTeams = () => {
     id: 1,
     name: "Thunder Warriors",
     sport: "Throwball",
-    level: "Cluster",
-    players: 12,
+    captain: "Priya Sharma",
+    cluster: "Tiruppur",
+    division: "Coimbatore",
     status: "Verified"
   }, {
     id: 2,
     name: "Lightning Bolts",
     sport: "Throwball",
-    level: "Division",
-    players: 11,
+    captain: "Arjun Kumar",
+    cluster: "Alandurai",
+    division: "Tiruppur",
     status: "Pending"
   }, {
     id: 3,
     name: "Storm Riders",
     sport: "Throwball",
-    level: "Finals",
-    players: 13,
+    captain: "Meera Patel",
+    cluster: "Coimbatore",
+    division: "Coimbatore",
     status: "Verified"
   }, {
     id: 4,
     name: "Wind Runners",
     sport: "Throwball",
-    level: "Cluster",
-    players: 10,
+    captain: "Rajesh Singh",
+    cluster: "Erode",
+    division: "Salem",
     status: "Verified"
   }, {
     id: 5,
     name: "Spike Masters",
     sport: "Volleyball",
-    level: "Cluster",
-    players: 14,
+    captain: "Kavitha Raj",
+    cluster: "Tiruppur",
+    division: "Coimbatore",
     status: "Verified"
   }, {
     id: 6,
     name: "Net Warriors",
     sport: "Volleyball",
-    level: "Division",
-    players: 12,
+    captain: "Deepak Nair",
+    cluster: "Alandurai",
+    division: "Tiruppur",
     status: "Pending"
   }, {
     id: 7,
     name: "Shuttle Pros",
     sport: "Badminton",
-    level: "Finals",
-    players: 8,
+    captain: "Anita Reddy",
+    cluster: "Coimbatore",
+    division: "Coimbatore",
     status: "Verified"
   }, {
     id: 8,
     name: "Court Kings",
     sport: "Badminton",
-    level: "Cluster",
-    players: 10,
+    captain: "Vikram Gupta",
+    cluster: "Erode",
+    division: "Salem",
     status: "Verified"
   }, {
     id: 9,
     name: "Chase Masters",
     sport: "Kho-Kho",
-    level: "Division",
-    players: 15,
+    captain: "Lakshmi Devi",
+    cluster: "Tiruppur",
+    division: "Coimbatore",
     status: "Verified"
   }, {
     id: 10,
     name: "Tag Champions",
     sport: "Kho-Kho",
-    level: "Finals",
-    players: 14,
+    captain: "Suresh Babu",
+    cluster: "Alandurai",
+    division: "Tiruppur",
     status: "Pending"
   }];
-  const handleLevelChange = (level: string, checked: boolean) => {
-    setSelectedLevels(prev => ({
+  const handleClusterChange = (cluster: string, checked: boolean) => {
+    setSelectedClusters(prev => ({
       ...prev,
-      [level]: checked
+      [cluster]: checked
     }));
   };
+  
+  const handleDivisionChange = (division: string, checked: boolean) => {
+    setSelectedDivisions(prev => ({
+      ...prev,
+      [division]: checked
+    }));
+  };
+
   const handleStatusChange = (status: string, checked: boolean) => {
     setSelectedStatus(prev => ({
       ...prev,
       [status]: checked
     }));
   };
-  const filteredTeams = registeredTeams.filter(team => team.sport.toLowerCase() === sport?.toLowerCase() && team.name.toLowerCase().includes(searchQuery.toLowerCase()) && (Object.values(selectedLevels).every(v => !v) || selectedLevels[team.level.toLowerCase() as keyof typeof selectedLevels]));
+  
+  const filteredTeams = registeredTeams.filter(team => 
+    team.sport.toLowerCase() === sport?.toLowerCase() && 
+    team.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (Object.values(selectedClusters).every(v => !v) || selectedClusters[team.cluster.toLowerCase() as keyof typeof selectedClusters]) &&
+    (Object.values(selectedDivisions).every(v => !v) || selectedDivisions[team.division.toLowerCase() as keyof typeof selectedDivisions])
+  );
   const sportName = sport?.charAt(0).toUpperCase() + sport?.slice(1) || "";
   return <div className="min-h-screen bg-background">
       {/* Header */}
@@ -142,8 +172,9 @@ const VolunteerTeams = () => {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Team Name</TableHead>
-                      <TableHead>Level</TableHead>
-                      <TableHead>Players</TableHead>
+                      <TableHead>Captain</TableHead>
+                      <TableHead>Cluster</TableHead>
+                      <TableHead>Division</TableHead>
                       <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -152,8 +183,9 @@ const VolunteerTeams = () => {
                         <TableCell className="font-medium text-primary" onClick={() => navigate(`/team-details/${team.id}`)}>
                           {team.name}
                         </TableCell>
-                        <TableCell>{team.level}</TableCell>
-                        <TableCell>{team.players}</TableCell>
+                        <TableCell>{team.captain}</TableCell>
+                        <TableCell>{team.cluster}</TableCell>
+                        <TableCell>{team.division}</TableCell>
                         <TableCell>
                           <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
                             {team.status}
@@ -199,9 +231,59 @@ const VolunteerTeams = () => {
                     </div>
                   </div>
 
-                  
+                  <div>
+                    <h4 className="font-medium mb-3">Cluster</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="tiruppur" checked={selectedClusters.tiruppur} onCheckedChange={checked => handleClusterChange("tiruppur", checked as boolean)} />
+                        <label htmlFor="tiruppur" className="text-sm cursor-pointer">
+                          Tiruppur
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="alandurai" checked={selectedClusters.alandurai} onCheckedChange={checked => handleClusterChange("alandurai", checked as boolean)} />
+                        <label htmlFor="alandurai" className="text-sm cursor-pointer">
+                          Alandurai
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="coimbatore-cluster" checked={selectedClusters.coimbatore} onCheckedChange={checked => handleClusterChange("coimbatore", checked as boolean)} />
+                        <label htmlFor="coimbatore-cluster" className="text-sm cursor-pointer">
+                          Coimbatore
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="erode" checked={selectedClusters.erode} onCheckedChange={checked => handleClusterChange("erode", checked as boolean)} />
+                        <label htmlFor="erode" className="text-sm cursor-pointer">
+                          Erode
+                        </label>
+                      </div>
+                    </div>
+                  </div>
 
-                  
+                  <div>
+                    <h4 className="font-medium mb-3">Division</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="coimbatore-division" checked={selectedDivisions.coimbatore} onCheckedChange={checked => handleDivisionChange("coimbatore", checked as boolean)} />
+                        <label htmlFor="coimbatore-division" className="text-sm cursor-pointer">
+                          Coimbatore
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="tiruppur-division" checked={selectedDivisions.tiruppur} onCheckedChange={checked => handleDivisionChange("tiruppur", checked as boolean)} />
+                        <label htmlFor="tiruppur-division" className="text-sm cursor-pointer">
+                          Tiruppur
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox id="salem-division" checked={selectedDivisions.salem} onCheckedChange={checked => handleDivisionChange("salem", checked as boolean)} />
+                        <label htmlFor="salem-division" className="text-sm cursor-pointer">
+                          Salem
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>}
