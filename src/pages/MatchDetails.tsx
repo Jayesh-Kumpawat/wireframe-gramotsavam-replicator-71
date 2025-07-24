@@ -11,8 +11,8 @@ const MatchDetails = () => {
   // Mock data - in real app this would come from API based on matchId
   const matchData = {
     id: matchId,
-    teamA: "Team A",
-    teamB: "Team B",
+    teamA: { id: "team-a-1", name: "Team A" },
+    teamB: { id: "team-b-1", name: "Team B" },
     scheduledDate: "3/01/25",
     venue: "Coimbatore",
     status: "scheduled"
@@ -73,7 +73,16 @@ const MatchDetails = () => {
           {/* Team A Details */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">{matchData.teamA} Details</CardTitle>
+              <CardTitle className="text-base">
+                <Button 
+                  variant="link" 
+                  className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
+                  onClick={() => navigate(`/team-details/${matchData.teamA.id}`)}
+                >
+                  {matchData.teamA.name}
+                </Button>
+                {" Details"}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex gap-3 overflow-x-auto pb-2">
@@ -100,7 +109,16 @@ const MatchDetails = () => {
           {/* Team B Details */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">{matchData.teamB} Details</CardTitle>
+              <CardTitle className="text-base">
+                <Button 
+                  variant="link" 
+                  className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
+                  onClick={() => navigate(`/team-details/${matchData.teamB.id}`)}
+                >
+                  {matchData.teamB.name}
+                </Button>
+                {" Details"}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex gap-3 overflow-x-auto pb-2">
