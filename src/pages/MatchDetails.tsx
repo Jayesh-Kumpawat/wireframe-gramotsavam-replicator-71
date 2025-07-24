@@ -73,15 +73,17 @@ const MatchDetails = () => {
           {/* Team A Details */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">
-                <Button 
-                  variant="link" 
-                  className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
-                  onClick={() => navigate(`/team-details/${matchData.teamA.id}`)}
-                >
-                  {matchData.teamA.name}
-                </Button>
-                {" Details"}
+               <CardTitle className="text-base">
+                <span>
+                  <Button 
+                    variant="link" 
+                    className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
+                    onClick={() => navigate(`/team-details/${matchData.teamA.id}`)}
+                  >
+                    {matchData.teamA.name}
+                  </Button>
+                  {" Details"}
+                </span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -109,15 +111,17 @@ const MatchDetails = () => {
           {/* Team B Details */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">
-                <Button 
-                  variant="link" 
-                  className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
-                  onClick={() => navigate(`/team-details/${matchData.teamB.id}`)}
-                >
-                  {matchData.teamB.name}
-                </Button>
-                {" Details"}
+               <CardTitle className="text-base">
+                <span>
+                  <Button 
+                    variant="link" 
+                    className="p-0 h-auto text-base font-semibold text-foreground hover:text-primary"
+                    onClick={() => navigate(`/team-details/${matchData.teamB.id}`)}
+                  >
+                    {matchData.teamB.name}
+                  </Button>
+                  {" Details"}
+                </span>
               </CardTitle>
             </CardHeader>
             <CardContent>
