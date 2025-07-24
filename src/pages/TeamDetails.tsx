@@ -8,12 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, User, Settings, Eye } from "lucide-react";
 import { useState } from "react";
-
 const TeamDetails = () => {
   const navigate = useNavigate();
-  const { teamId } = useParams();
+  const {
+    teamId
+  } = useParams();
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
-  const [statusFilters, setStatusFilters] = useState({ verified: false, registered: false });
+  const [statusFilters, setStatusFilters] = useState({
+    verified: false,
+    registered: false
+  });
   const [ageFilter, setAgeFilter] = useState("");
   const [documentsFilter, setDocumentsFilter] = useState("");
 
@@ -26,24 +30,36 @@ const TeamDetails = () => {
     status: "Verified",
     captain: "Player 1"
   };
-
-  const players = [
-    { id: 1, name: "Player 1", status: "Verified", position: "Captain" },
-    { id: 2, name: "Player 2", status: "Registered", position: "Player" },
-    { id: 3, name: "Player 3", status: "Verified", position: "Player" },
-    { id: 4, name: "Player 4", status: "Registered", position: "Player" },
-    { id: 5, name: "Player 5", status: "Verified", position: "Player" }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const players = [{
+    id: 1,
+    name: "Player 1",
+    status: "Verified",
+    position: "Captain"
+  }, {
+    id: 2,
+    name: "Player 2",
+    status: "Registered",
+    position: "Player"
+  }, {
+    id: 3,
+    name: "Player 3",
+    status: "Verified",
+    position: "Player"
+  }, {
+    id: 4,
+    name: "Player 4",
+    status: "Registered",
+    position: "Player"
+  }, {
+    id: 5,
+    name: "Player 5",
+    status: "Verified",
+    position: "Player"
+  }];
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b p-4 flex items-center gap-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate(-1)}
-        >
+        <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <h1 className="text-2xl font-bold">Team 2 Details</h1>
@@ -91,7 +107,7 @@ const TeamDetails = () => {
               <div className="flex items-center justify-between">
                 <CardTitle>Players</CardTitle>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Player Name | Captain | Status | Others</span>
+                  
                   <Sheet>
                     <SheetTrigger asChild>
                       <Button variant="ghost" size="icon">
@@ -107,23 +123,17 @@ const TeamDetails = () => {
                           <h4 className="font-medium mb-3">Status</h4>
                           <div className="space-y-2">
                             <div className="flex items-center space-x-2">
-                              <Checkbox 
-                                id="verified" 
-                                checked={statusFilters.verified}
-                                onCheckedChange={(checked) => 
-                                  setStatusFilters(prev => ({ ...prev, verified: checked as boolean }))
-                                }
-                              />
+                              <Checkbox id="verified" checked={statusFilters.verified} onCheckedChange={checked => setStatusFilters(prev => ({
+                              ...prev,
+                              verified: checked as boolean
+                            }))} />
                               <label htmlFor="verified" className="text-sm">Verified</label>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Checkbox 
-                                id="registered" 
-                                checked={statusFilters.registered}
-                                onCheckedChange={(checked) => 
-                                  setStatusFilters(prev => ({ ...prev, registered: checked as boolean }))
-                                }
-                              />
+                              <Checkbox id="registered" checked={statusFilters.registered} onCheckedChange={checked => setStatusFilters(prev => ({
+                              ...prev,
+                              registered: checked as boolean
+                            }))} />
                               <label htmlFor="registered" className="text-sm">Registered</label>
                             </div>
                           </div>
@@ -175,23 +185,11 @@ const TeamDetails = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {players.map((player) => (
-                    <TableRow 
-                      key={player.id}
-                      className={selectedPlayer === player.name ? "bg-muted" : ""}
-                    >
+                  {players.map(player => <TableRow key={player.id} className={selectedPlayer === player.name ? "bg-muted" : ""}>
                       <TableCell>
-                        <input
-                          type="checkbox"
-                          checked={selectedPlayer === player.name}
-                          onChange={() => setSelectedPlayer(selectedPlayer === player.name ? null : player.name)}
-                          className="rounded"
-                        />
+                        <input type="checkbox" checked={selectedPlayer === player.name} onChange={() => setSelectedPlayer(selectedPlayer === player.name ? null : player.name)} className="rounded" />
                       </TableCell>
-                      <TableCell 
-                        className={`font-medium cursor-pointer ${player.name === "Player 2" ? "text-primary bg-primary/10" : ""}`}
-                        onClick={() => navigate("/player-profile-creation")}
-                      >
+                      <TableCell className={`font-medium cursor-pointer ${player.name === "Player 2" ? "text-primary bg-primary/10" : ""}`} onClick={() => navigate("/player-profile-creation")}>
                         {player.name}
                       </TableCell>
                       <TableCell>
@@ -201,16 +199,11 @@ const TeamDetails = () => {
                       </TableCell>
                       <TableCell>{player.position}</TableCell>
                       <TableCell>
-                        <Button 
-                          variant="ghost" 
-                          size="sm"
-                          onClick={() => navigate("/player-profile-view")}
-                        >
+                        <Button variant="ghost" size="sm" onClick={() => navigate("/player-profile-view")}>
                           <Eye className="w-4 h-4" />
                         </Button>
                       </TableCell>
-                    </TableRow>
-                  ))}
+                    </TableRow>)}
                 </TableBody>
               </Table>
 
@@ -223,8 +216,6 @@ const TeamDetails = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default TeamDetails;
