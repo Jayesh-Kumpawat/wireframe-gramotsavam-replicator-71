@@ -8,10 +8,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Search, Filter, X } from "lucide-react";
 import { useState } from "react";
-
 const VolunteerTeams = () => {
   const navigate = useNavigate();
-  const { sport } = useParams();
+  const {
+    sport
+  } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedLevels, setSelectedLevels] = useState({
@@ -23,47 +24,95 @@ const VolunteerTeams = () => {
     verified: false,
     registered: false
   });
-
-  const registeredTeams = [
-    { id: 1, name: "Thunder Warriors", sport: "Throwball", level: "Cluster", players: 12, status: "Verified" },
-    { id: 2, name: "Lightning Bolts", sport: "Throwball", level: "Division", players: 11, status: "Pending" },
-    { id: 3, name: "Storm Riders", sport: "Throwball", level: "Finals", players: 13, status: "Verified" },
-    { id: 4, name: "Wind Runners", sport: "Throwball", level: "Cluster", players: 10, status: "Verified" },
-    { id: 5, name: "Spike Masters", sport: "Volleyball", level: "Cluster", players: 14, status: "Verified" },
-    { id: 6, name: "Net Warriors", sport: "Volleyball", level: "Division", players: 12, status: "Pending" },
-    { id: 7, name: "Shuttle Pros", sport: "Badminton", level: "Finals", players: 8, status: "Verified" },
-    { id: 8, name: "Court Kings", sport: "Badminton", level: "Cluster", players: 10, status: "Verified" },
-    { id: 9, name: "Chase Masters", sport: "Kho-Kho", level: "Division", players: 15, status: "Verified" },
-    { id: 10, name: "Tag Champions", sport: "Kho-Kho", level: "Finals", players: 14, status: "Pending" }
-  ];
-
+  const registeredTeams = [{
+    id: 1,
+    name: "Thunder Warriors",
+    sport: "Throwball",
+    level: "Cluster",
+    players: 12,
+    status: "Verified"
+  }, {
+    id: 2,
+    name: "Lightning Bolts",
+    sport: "Throwball",
+    level: "Division",
+    players: 11,
+    status: "Pending"
+  }, {
+    id: 3,
+    name: "Storm Riders",
+    sport: "Throwball",
+    level: "Finals",
+    players: 13,
+    status: "Verified"
+  }, {
+    id: 4,
+    name: "Wind Runners",
+    sport: "Throwball",
+    level: "Cluster",
+    players: 10,
+    status: "Verified"
+  }, {
+    id: 5,
+    name: "Spike Masters",
+    sport: "Volleyball",
+    level: "Cluster",
+    players: 14,
+    status: "Verified"
+  }, {
+    id: 6,
+    name: "Net Warriors",
+    sport: "Volleyball",
+    level: "Division",
+    players: 12,
+    status: "Pending"
+  }, {
+    id: 7,
+    name: "Shuttle Pros",
+    sport: "Badminton",
+    level: "Finals",
+    players: 8,
+    status: "Verified"
+  }, {
+    id: 8,
+    name: "Court Kings",
+    sport: "Badminton",
+    level: "Cluster",
+    players: 10,
+    status: "Verified"
+  }, {
+    id: 9,
+    name: "Chase Masters",
+    sport: "Kho-Kho",
+    level: "Division",
+    players: 15,
+    status: "Verified"
+  }, {
+    id: 10,
+    name: "Tag Champions",
+    sport: "Kho-Kho",
+    level: "Finals",
+    players: 14,
+    status: "Pending"
+  }];
   const handleLevelChange = (level: string, checked: boolean) => {
-    setSelectedLevels(prev => ({ ...prev, [level]: checked }));
+    setSelectedLevels(prev => ({
+      ...prev,
+      [level]: checked
+    }));
   };
-
   const handleStatusChange = (status: string, checked: boolean) => {
-    setSelectedStatus(prev => ({ ...prev, [status]: checked }));
+    setSelectedStatus(prev => ({
+      ...prev,
+      [status]: checked
+    }));
   };
-
-  const filteredTeams = registeredTeams
-    .filter(team => 
-      team.sport.toLowerCase() === sport?.toLowerCase() &&
-      team.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      (Object.values(selectedLevels).every(v => !v) || 
-       selectedLevels[team.level.toLowerCase() as keyof typeof selectedLevels])
-    );
-
+  const filteredTeams = registeredTeams.filter(team => team.sport.toLowerCase() === sport?.toLowerCase() && team.name.toLowerCase().includes(searchQuery.toLowerCase()) && (Object.values(selectedLevels).every(v => !v) || selectedLevels[team.level.toLowerCase() as keyof typeof selectedLevels]));
   const sportName = sport?.charAt(0).toUpperCase() + sport?.slice(1) || "";
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b p-4 flex items-center gap-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/volunteer-dashboard")}
-        >
+        <Button variant="ghost" size="icon" onClick={() => navigate("/volunteer-dashboard")}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <h1 className="text-2xl font-bold">Teams Registered - {sportName}</h1>
@@ -80,18 +129,9 @@ const VolunteerTeams = () => {
                   <div className="flex items-center gap-2">
                     <div className="relative">
                       <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
-                      <Input
-                        placeholder="Search teams..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10"
-                      />
+                      <Input placeholder="Search teams..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-10" />
                     </div>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => setShowFilters(!showFilters)}
-                    >
+                    <Button variant="outline" size="icon" onClick={() => setShowFilters(!showFilters)}>
                       <Filter className="w-4 h-4" />
                     </Button>
                   </div>
@@ -108,12 +148,8 @@ const VolunteerTeams = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredTeams.map((team) => (
-                      <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
-                        <TableCell 
-                          className="font-medium text-primary"
-                          onClick={() => navigate(`/team-details/${team.id}`)}
-                        >
+                    {filteredTeams.map(team => <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
+                        <TableCell className="font-medium text-primary" onClick={() => navigate(`/team-details/${team.id}`)}>
                           {team.name}
                         </TableCell>
                         <TableCell>{team.level}</TableCell>
@@ -123,31 +159,23 @@ const VolunteerTeams = () => {
                             {team.status}
                           </Badge>
                         </TableCell>
-                      </TableRow>
-                    ))}
+                      </TableRow>)}
                   </TableBody>
                 </Table>
-                {filteredTeams.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground">
+                {filteredTeams.length === 0 && <div className="text-center py-8 text-muted-foreground">
                     No teams found for {sportName}
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
           </div>
 
           {/* Filters Panel */}
-          {showFilters && (
-            <div className="lg:col-span-1">
+          {showFilters && <div className="lg:col-span-1">
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>Filters</CardTitle>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setShowFilters(false)}
-                    >
+                    <Button variant="ghost" size="icon" onClick={() => setShowFilters(false)}>
                       <X className="w-4 h-4" />
                     </Button>
                   </div>
@@ -157,21 +185,13 @@ const VolunteerTeams = () => {
                     <h4 className="font-medium mb-3">Status</h4>
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <Checkbox
-                          id="verified"
-                          checked={selectedStatus.verified}
-                          onCheckedChange={(checked) => handleStatusChange("verified", checked as boolean)}
-                        />
+                        <Checkbox id="verified" checked={selectedStatus.verified} onCheckedChange={checked => handleStatusChange("verified", checked as boolean)} />
                         <label htmlFor="verified" className="text-sm cursor-pointer">
                           Verified
                         </label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Checkbox
-                          id="registered"
-                          checked={selectedStatus.registered}
-                          onCheckedChange={(checked) => handleStatusChange("registered", checked as boolean)}
-                        />
+                        <Checkbox id="registered" checked={selectedStatus.registered} onCheckedChange={checked => handleStatusChange("registered", checked as boolean)} />
                         <label htmlFor="registered" className="text-sm cursor-pointer">
                           Registered
                         </label>
@@ -179,44 +199,14 @@ const VolunteerTeams = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <h4 className="font-medium mb-3">Age</h4>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select age group" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Ages</SelectItem>
-                        <SelectItem value="18-25">18-25</SelectItem>
-                        <SelectItem value="26-35">26-35</SelectItem>
-                        <SelectItem value="36-45">36-45</SelectItem>
-                        <SelectItem value="45+">45+</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  
 
-                  <div>
-                    <h4 className="font-medium mb-3">Documents</h4>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select document status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Documents</SelectItem>
-                        <SelectItem value="complete">Complete</SelectItem>
-                        <SelectItem value="incomplete">Incomplete</SelectItem>
-                        <SelectItem value="pending">Pending Review</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  
                 </CardContent>
               </Card>
-            </div>
-          )}
+            </div>}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default VolunteerTeams;
