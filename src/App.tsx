@@ -62,6 +62,7 @@ const App = () => (
         <Route path="/player-profile-view" element={<PlayerProfileView />} />
         <Route path="/player-profile-edit" element={<PlayerProfileEdit />} />
           <Route path="/player-profile" element={<PlayerProfileCreation />} />
+          <Route path="/player-profile-creation" element={<PlayerProfileCreation />} />
           <Route path="/player-address" element={<PlayerAddress />} />
           <Route path="/player-aadhar" element={<PlayerAadhar />} />
           <Route path="/player-success" element={<PlayerSuccess />} />
