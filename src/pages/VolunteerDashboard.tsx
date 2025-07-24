@@ -96,7 +96,7 @@ const VolunteerDashboard = () => {
               <p className="text-sm text-muted-foreground">Select Sport</p>
             </CardHeader>
             <CardContent className="space-y-3">
-              {sports.map(sport => <Button key={sport} variant={sport === "Throwball" ? "destructive" : "outline"} className="w-full justify-start text-base py-3" onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}>
+              {sports.map(sport => <Button key={sport} variant={sport === selectedSport ? "destructive" : "outline"} className="w-full justify-start text-base py-3" onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}>
                   {sport}
                 </Button>)}
               <Button variant="secondary" className="w-full mt-4 text-base py-3" onClick={() => navigate("/volunteer-team-creation")}>
