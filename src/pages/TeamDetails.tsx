@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, User, Settings, Eye } from "lucide-react";
+import { ArrowLeft, User, Settings, Eye, Plus } from "lucide-react";
 import { useState } from "react";
 const TeamDetails = () => {
   const navigate = useNavigate();
@@ -107,7 +107,13 @@ const TeamDetails = () => {
               <div className="flex items-center justify-between">
                 <CardTitle>Players</CardTitle>
                 <div className="flex items-center gap-2">
-                  
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    onClick={() => navigate("/player-profile-creation")}
+                  >
+                    <Plus className="w-4 h-4" />
+                  </Button>
                   <Sheet>
                     <SheetTrigger asChild>
                       <Button variant="ghost" size="icon">
