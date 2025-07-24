@@ -7,6 +7,7 @@ const PlayerAddress = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const personalInfo = location.state?.personalInfo || {};
+  const fromTeamDetails = location.state?.fromTeamDetails;
   
   const [addressData, setAddressData] = useState({
     state: "",
@@ -20,7 +21,8 @@ const PlayerAddress = () => {
     navigate("/player-aadhar", { 
       state: { 
         personalInfo, 
-        addressInfo: addressData 
+        addressInfo: addressData,
+        fromTeamDetails
       } 
     });
   };

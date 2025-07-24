@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 
 const PlayerProfileCreation = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromTeamDetails = location.state?.fromTeamDetails;
   const [formData, setFormData] = useState({
     fullName: "",
     dob: undefined as Date | undefined,
@@ -20,7 +22,7 @@ const PlayerProfileCreation = () => {
   });
 
   const handleNext = () => {
-    navigate("/player-address", { state: { personalInfo: formData } });
+    navigate("/player-address", { state: { personalInfo: formData, fromTeamDetails } });
   };
 
   return (
