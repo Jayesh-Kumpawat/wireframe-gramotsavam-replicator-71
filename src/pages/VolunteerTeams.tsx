@@ -32,6 +32,12 @@ const VolunteerTeams = () => {
     registered: false
   });
 
+  const [selectedLevels, setSelectedLevels] = useState({
+    cluster: false,
+    division: false,
+    finals: false
+  });
+
   const registeredTeams = [
     {
       id: 1,
@@ -40,6 +46,7 @@ const VolunteerTeams = () => {
       captain: "Priya Sharma",
       cluster: "Tiruppur",
       division: "Coimbatore",
+      currentLevel: "Division",
       status: "Verified"
     },
     {
@@ -49,6 +56,7 @@ const VolunteerTeams = () => {
       captain: "Arjun Kumar",
       cluster: "Alandurai",
       division: "Tiruppur",
+      currentLevel: "Cluster",
       status: "Pending"
     },
     {
@@ -58,6 +66,7 @@ const VolunteerTeams = () => {
       captain: "Meera Patel",
       cluster: "Coimbatore",
       division: "Coimbatore",
+      currentLevel: "Finals",
       status: "Verified"
     },
     {
@@ -67,6 +76,7 @@ const VolunteerTeams = () => {
       captain: "Rajesh Singh",
       cluster: "Erode",
       division: "Salem",
+      currentLevel: "Division",
       status: "Verified"
     },
     {
@@ -76,6 +86,7 @@ const VolunteerTeams = () => {
       captain: "Kavitha Raj",
       cluster: "Tiruppur",
       division: "Coimbatore",
+      currentLevel: "Division",
       status: "Verified"
     },
     {
@@ -85,6 +96,7 @@ const VolunteerTeams = () => {
       captain: "Deepak Nair",
       cluster: "Alandurai",
       division: "Tiruppur",
+      currentLevel: "Cluster",
       status: "Pending"
     },
     {
@@ -94,6 +106,7 @@ const VolunteerTeams = () => {
       captain: "Anita Reddy",
       cluster: "Coimbatore",
       division: "Coimbatore",
+      currentLevel: "Finals",
       status: "Verified"
     },
     {
@@ -103,6 +116,7 @@ const VolunteerTeams = () => {
       captain: "Vikram Gupta",
       cluster: "Erode",
       division: "Salem",
+      currentLevel: "Division",
       status: "Verified"
     },
     {
@@ -112,6 +126,7 @@ const VolunteerTeams = () => {
       captain: "Lakshmi Devi",
       cluster: "Tiruppur",
       division: "Coimbatore",
+      currentLevel: "Cluster",
       status: "Verified"
     },
     {
@@ -121,6 +136,7 @@ const VolunteerTeams = () => {
       captain: "Suresh Babu",
       cluster: "Alandurai",
       division: "Tiruppur",
+      currentLevel: "Division",
       status: "Pending"
     }
   ];
@@ -146,11 +162,19 @@ const VolunteerTeams = () => {
     }));
   };
 
+  const handleLevelChange = (level: string, checked: boolean) => {
+    setSelectedLevels(prev => ({
+      ...prev,
+      [level]: checked
+    }));
+  };
+
   const filteredTeams = registeredTeams.filter(team => 
     team.sport.toLowerCase() === sport?.toLowerCase() && 
     team.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
     (Object.values(selectedClusters).every(v => !v) || selectedClusters[team.cluster.toLowerCase() as keyof typeof selectedClusters]) &&
-    (Object.values(selectedDivisions).every(v => !v) || selectedDivisions[team.division.toLowerCase() as keyof typeof selectedDivisions])
+    (Object.values(selectedDivisions).every(v => !v) || selectedDivisions[team.division.toLowerCase() as keyof typeof selectedDivisions]) &&
+    (Object.values(selectedLevels).every(v => !v) || selectedLevels[team.currentLevel.toLowerCase() as keyof typeof selectedLevels])
   );
 
   const sportName = sport?.charAt(0).toUpperCase() + sport?.slice(1) || "";
@@ -190,16 +214,17 @@ const VolunteerTeams = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Team Name</TableHead>
-                      <TableHead>Captain</TableHead>
-                      <TableHead>Cluster</TableHead>
-                      <TableHead>Division</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Team Name</TableHead>
+                        <TableHead>Captain</TableHead>
+                        <TableHead>Cluster</TableHead>
+                        <TableHead>Division</TableHead>
+                        <TableHead>Current Level</TableHead>
+                        <TableHead>Status</TableHead>
+                      </TableRow>
+                    </TableHeader>
                   <TableBody>
                     {filteredTeams.map(team => (
                       <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
@@ -212,6 +237,11 @@ const VolunteerTeams = () => {
                         <TableCell>{team.captain}</TableCell>
                         <TableCell>{team.cluster}</TableCell>
                         <TableCell>{team.division}</TableCell>
+                        <TableCell>
+                          <Badge variant={team.currentLevel === "Finals" ? "destructive" : team.currentLevel === "Division" ? "default" : "secondary"}>
+                            {team.currentLevel}
+                          </Badge>
+                        </TableCell>
                         <TableCell>
                           <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
                             {team.status}
@@ -243,6 +273,42 @@ const VolunteerTeams = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="font-medium mb-3">Current Level</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id="cluster-level" 
+                          checked={selectedLevels.cluster} 
+                          onCheckedChange={checked => handleLevelChange("cluster", checked as boolean)} 
+                        />
+                        <label htmlFor="cluster-level" className="text-sm cursor-pointer">
+                          Cluster
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id="division-level" 
+                          checked={selectedLevels.division} 
+                          onCheckedChange={checked => handleLevelChange("division", checked as boolean)} 
+                        />
+                        <label htmlFor="division-level" className="text-sm cursor-pointer">
+                          Division
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id="finals-level" 
+                          checked={selectedLevels.finals} 
+                          onCheckedChange={checked => handleLevelChange("finals", checked as boolean)} 
+                        />
+                        <label htmlFor="finals-level" className="text-sm cursor-pointer">
+                          Finals
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     <h4 className="font-medium mb-3">Status</h4>
                     <div className="space-y-2">
