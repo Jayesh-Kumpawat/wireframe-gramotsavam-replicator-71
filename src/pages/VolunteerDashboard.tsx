@@ -10,7 +10,7 @@ import { Bell, Search, Home, Trophy, UserCircle, Filter, X } from "lucide-react"
 import { useState } from "react";
 const VolunteerDashboard = () => {
   const navigate = useNavigate();
-  const [selectedSport, setSelectedSport] = useState("Throwball");
+  const [selectedSport, setSelectedSport] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedLevels, setSelectedLevels] = useState({
