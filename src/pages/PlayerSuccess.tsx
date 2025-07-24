@@ -9,7 +9,7 @@ const PlayerSuccess = () => {
   };
 
   const handleSkip = () => {
-    navigate("/team-details/1"); // Navigate back to team details to show updated player list
+    navigate("/player-dashboard");
   };
 
   return (

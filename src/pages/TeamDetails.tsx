@@ -110,7 +110,7 @@ const TeamDetails = () => {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    onClick={() => navigate("/player-profile-creation")}
+                    onClick={() => navigate("/player-profile-creation", { state: { fromTeamDetails: true } })}
                   >
                     <Plus className="w-4 h-4" />
                   </Button>

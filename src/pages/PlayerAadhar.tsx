@@ -21,7 +21,19 @@ const PlayerAadhar = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/team-details/1"); // Navigate back to team details to show updated player list
+    // Check if coming from team details page
+    const fromTeamDetails = location.state?.fromTeamDetails;
+    if (fromTeamDetails) {
+      navigate("/team-details/1");
+    } else {
+      navigate("/player-success", { 
+        state: { 
+          personalInfo, 
+          addressInfo,
+          aadharFiles
+        } 
+      });
+    }
   };
 
   return (
