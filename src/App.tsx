@@ -20,7 +20,7 @@ import PlayerAadhar from "./pages/PlayerAadhar";
 import PlayerSuccess from "./pages/PlayerSuccess";
 import TeamCreation from "./pages/TeamCreation";
 import TeamRegister from "./pages/TeamRegister";
-import TeamAddManually from "./pages/TeamAddManually";
+
 import AddTeamMember from "./pages/AddTeamMember";
 import AddMemberAddress from "./pages/AddMemberAddress";
 import AddMemberAadhar from "./pages/AddMemberAadhar";
@@ -67,7 +67,7 @@ const App = () => (
           <Route path="/player-success" element={<PlayerSuccess />} />
           <Route path="/team-creation" element={<TeamCreation />} />
           <Route path="/team-register" element={<TeamRegister />} />
-          <Route path="/team-add-manually" element={<TeamAddManually />} />
+          
           <Route path="/add-team-member" element={<AddTeamMember />} />
           <Route path="/add-member-address" element={<AddMemberAddress />} />
           <Route path="/add-member-aadhar" element={<AddMemberAadhar />} />
