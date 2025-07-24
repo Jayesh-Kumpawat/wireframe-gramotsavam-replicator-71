@@ -20,7 +20,7 @@ const LoginOptions = () => {
             </Button>
             
             <Button onClick={handleVolunteerLogin} variant="outline" className="w-full px-6 py-3">
-              Volunteer/PoC/Admin
+              Volunteer/PoC/Admin Signup/Login
             </Button>
           </div>
         </div>
