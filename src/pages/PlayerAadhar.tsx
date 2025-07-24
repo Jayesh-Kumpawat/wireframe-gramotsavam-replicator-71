@@ -21,13 +21,7 @@ const PlayerAadhar = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/player-success", { 
-      state: { 
-        personalInfo, 
-        addressInfo,
-        aadharFiles
-      } 
-    });
+    navigate(-1); // Go back to previous page
   };
 
   return (
