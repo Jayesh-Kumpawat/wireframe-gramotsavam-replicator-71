@@ -151,7 +151,7 @@ const PlayerMatches = () => {
                         onClick={() => handleViewMatches(tournament.sport, level)}
                         disabled={level.status === "Locked"}
                       >
-                        View Actions
+                        View Matches
                       </Button>
                     </div>
                   ))}
