@@ -21,7 +21,7 @@ const PlayerAadhar = () => {
   };
 
   const handleSubmit = () => {
-    navigate(-1); // Go back to previous page
+    navigate("/team-details/1"); // Navigate back to team details to show updated player list
   };
 
   return (
