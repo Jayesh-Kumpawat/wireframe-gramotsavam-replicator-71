@@ -110,7 +110,7 @@ const TeamDetails = () => {
                   <Button 
                     variant="outline" 
                     size="icon"
-                    onClick={() => navigate("/player-signup")}
+                    onClick={() => navigate("/player-profile-creation")}
                   >
                     <Plus className="w-4 h-4" />
                   </Button>
