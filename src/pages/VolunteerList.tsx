@@ -6,43 +6,32 @@ import { ArrowLeft, Filter } from "lucide-react";
 import { useState } from "react";
 import VolunteerFiltersModal from "@/components/VolunteerFiltersModal";
 import AssignLevelModal from "@/components/AssignLevelModal";
-
 const VolunteerList = () => {
   const navigate = useNavigate();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [assignLevelOpen, setAssignLevelOpen] = useState(false);
-
-  const volunteerData = [
-    {
-      name: "John Smith",
-      mobNo: "98xxx",
-      levelAssignment: "CBE (Cluster)",
-      district: "Coimbatore",
-      block: "xxx",
-      state: "Tamil Nadu"
-    },
-    {
-      name: "Jane Doe",
-      mobNo: "98xxx",
-      levelAssignment: "Not Assigned",
-      district: "Thirupur",
-      block: "xxx",
-      state: "Tamil Nadu"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background p-6">
+  const volunteerData = [{
+    name: "John Smith",
+    mobNo: "98xxx",
+    levelAssignment: "CBE (Cluster)",
+    district: "Coimbatore",
+    block: "xxx",
+    state: "Tamil Nadu"
+  }, {
+    name: "Jane Doe",
+    mobNo: "98xxx",
+    levelAssignment: "Not Assigned",
+    district: "Thirupur",
+    block: "xxx",
+    state: "Tamil Nadu"
+  }];
+  return <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <h1 className="text-2xl font-bold mb-6">Volunteer List</h1>
         
         {/* Back Button */}
-        <Button 
-          onClick={() => navigate("/admin-dashboard")} 
-          variant="ghost" 
-          className="mb-4 p-2"
-        >
+        <Button onClick={() => navigate("/admin-dashboard")} variant="ghost" className="mb-4 p-2">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
@@ -52,23 +41,13 @@ const VolunteerList = () => {
           
           {/* Search and Actions */}
           <div className="flex gap-4 items-center">
-            <Input
-              placeholder="Search by name"
-              className="max-w-sm"
-            />
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={() => setFiltersOpen(true)}
-            >
+            <Input placeholder="Search by name" className="max-w-sm" />
+            <Button variant="outline" size="icon" onClick={() => setFiltersOpen(true)}>
               <Filter className="h-4 w-4" />
             </Button>
           </div>
           
-          <Button 
-            className="bg-blue-500 hover:bg-blue-600 text-white"
-            onClick={() => setAssignLevelOpen(true)}
-          >
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white" onClick={() => setAssignLevelOpen(true)}>
             Assign LvL
           </Button>
         </div>
@@ -80,7 +59,7 @@ const VolunteerList = () => {
               <thead className="border-b bg-muted/50">
                 <tr>
                   <th className="text-left p-4 font-medium min-w-[60px]">
-                    <Checkbox />
+                    
                   </th>
                   <th className="text-left p-4 font-medium min-w-[120px]">Name</th>
                   <th className="text-left p-4 font-medium min-w-[100px]">Mob No.</th>
@@ -91,8 +70,7 @@ const VolunteerList = () => {
                 </tr>
               </thead>
               <tbody>
-                {volunteerData.map((row, index) => (
-                  <tr key={index} className="border-b">
+                {volunteerData.map((row, index) => <tr key={index} className="border-b">
                     <td className="p-4">
                       <Checkbox />
                     </td>
@@ -102,8 +80,7 @@ const VolunteerList = () => {
                     <td className="p-4">{row.district}</td>
                     <td className="p-4">{row.block}</td>
                     <td className="p-4">{row.state}</td>
-                  </tr>
-                ))}
+                  </tr>)}
               </tbody>
             </table>
           </div>
@@ -113,8 +90,6 @@ const VolunteerList = () => {
         <VolunteerFiltersModal open={filtersOpen} onOpenChange={setFiltersOpen} />
         <AssignLevelModal open={assignLevelOpen} onOpenChange={setAssignLevelOpen} />
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default VolunteerList;
