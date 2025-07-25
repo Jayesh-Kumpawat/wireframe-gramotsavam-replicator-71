@@ -39,6 +39,7 @@ import VolunteerMatchesSimple from "./pages/VolunteerMatchesSimple";
 import VolunteerTeamCreation from "./pages/VolunteerTeamCreation";
 import POCDashboard from "./pages/POCDashboard";
 import POCMatches from "./pages/POCMatches";
+import POCProfile from "./pages/POCProfile";
 import AdminDashboard from "./pages/AdminDashboard";
 import TeamDetails from "./pages/TeamDetails";
 import NotFound from "./pages/NotFound";
@@ -83,6 +84,7 @@ const App = () => (
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
           <Route path="/poc-matches" element={<POCMatches />} />
+          <Route path="/poc-profile" element={<POCProfile />} />
         <Route path="/volunteer-matches-simple" element={<VolunteerMatchesSimple />} />
         <Route path="/volunteer-team-creation" element={<VolunteerTeamCreation />} />
           <Route path="/volunteer-profile" element={<VolunteerProfile />} />
