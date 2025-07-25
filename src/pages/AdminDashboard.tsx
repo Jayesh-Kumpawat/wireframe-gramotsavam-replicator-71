@@ -49,7 +49,10 @@ const AdminDashboard = () => {
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
               </div>
-              <div className="flex-1 flex flex-col items-center py-4 cursor-pointer rounded-r-lg">
+              <div 
+                className="flex-1 flex flex-col items-center py-4 cursor-pointer rounded-r-lg"
+                onClick={() => navigate("/admin-profile")}
+              >
                 <UserCircle className="w-6 h-6" />
                 <span className="text-sm mt-1">Profile</span>
               </div>

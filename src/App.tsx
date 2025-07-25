@@ -47,6 +47,7 @@ import VolunteerList from "./pages/VolunteerList";
 import AdminTeamSelection from "./pages/AdminTeamSelection";
 import AdminTeamRegistrations from "./pages/AdminTeamRegistrations";
 import AdminMatches from "./pages/AdminMatches";
+import AdminProfile from "./pages/AdminProfile";
 import TeamDetails from "./pages/TeamDetails";
 import NotFound from "./pages/NotFound";
 
@@ -94,6 +95,7 @@ const App = () => (
           <Route path="/admin-team-selection" element={<AdminTeamSelection />} />
           <Route path="/admin-team-registrations/:sport" element={<AdminTeamRegistrations />} />
           <Route path="/admin-matches" element={<AdminMatches />} />
+          <Route path="/admin-profile" element={<AdminProfile />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
           <Route path="/poc-matches" element={<POCMatches />} />
           <Route path="/poc-profile" element={<POCProfile />} />
