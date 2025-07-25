@@ -34,7 +34,12 @@ const MatchDetails = () => {
   // Determine which matches page to navigate back to based on user type
   const handleBackNavigation = () => {
     const userType = sessionStorage.getItem('userType');
-    const matchesRoute = userType === 'poc' ? '/poc-matches' : '/volunteer-matches';
+    let matchesRoute = '/volunteer-matches'; // default
+    if (userType === 'poc') {
+      matchesRoute = '/poc-matches';
+    } else if (userType === 'admin') {
+      matchesRoute = '/admin-matches';
+    }
     navigate(matchesRoute);
   };
 
