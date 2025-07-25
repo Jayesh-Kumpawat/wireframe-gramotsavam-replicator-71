@@ -44,6 +44,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import LevelwiseVenues from "./pages/LevelwiseVenues";
 import ReportsDashboards from "./pages/ReportsDashboards";
 import VolunteerList from "./pages/VolunteerList";
+import AdminTeamSelection from "./pages/AdminTeamSelection";
+import AdminTeamRegistrations from "./pages/AdminTeamRegistrations";
+import AdminMatches from "./pages/AdminMatches";
 import TeamDetails from "./pages/TeamDetails";
 import NotFound from "./pages/NotFound";
 
@@ -88,6 +91,9 @@ const App = () => (
           <Route path="/levelwise-venues" element={<LevelwiseVenues />} />
           <Route path="/reports-dashboards" element={<ReportsDashboards />} />
           <Route path="/volunteer-list" element={<VolunteerList />} />
+          <Route path="/admin-team-selection" element={<AdminTeamSelection />} />
+          <Route path="/admin-team-registrations/:sport" element={<AdminTeamRegistrations />} />
+          <Route path="/admin-matches" element={<AdminMatches />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
           <Route path="/poc-matches" element={<POCMatches />} />
           <Route path="/poc-profile" element={<POCProfile />} />

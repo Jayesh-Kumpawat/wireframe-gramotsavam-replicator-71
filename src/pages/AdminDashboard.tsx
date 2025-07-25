@@ -6,7 +6,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { title: "Team Registrations", icon: Users, action: () => console.log("Team Registrations") },
+    { title: "Team Registrations", icon: Users, action: () => navigate("/admin-team-selection") },
     { title: "Volunteer List", icon: Users, action: () => navigate("/volunteer-list") },
     { title: "Levelwise Venues", icon: MapPin, action: () => navigate("/levelwise-venues") },
     { title: "Reports & Dashboards", icon: BarChart3, action: () => navigate("/reports-dashboards") },
@@ -42,7 +42,10 @@ const AdminDashboard = () => {
                 <Home className="w-6 h-6 text-blue-600" />
                 <span className="text-sm mt-1 text-blue-600">Home</span>
               </div>
-              <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
+              <div 
+                className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
+                onClick={() => navigate("/admin-matches")}
+              >
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
               </div>
