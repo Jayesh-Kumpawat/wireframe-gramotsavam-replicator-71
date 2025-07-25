@@ -7,11 +7,26 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Search, Filter, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const VolunteerTeams = () => {
   const navigate = useNavigate();
   const { sport } = useParams();
+  
+  useEffect(() => {
+    // Detect user type based on referrer if not already set
+    const currentUserType = sessionStorage.getItem('userType');
+    if (!currentUserType) {
+      const referrer = document.referrer;
+      if (referrer.includes('/poc-dashboard')) {
+        console.log('Debug VolunteerTeams - Detected POC from referrer');
+        sessionStorage.setItem('userType', 'poc');
+      } else if (referrer.includes('/volunteer-dashboard')) {
+        console.log('Debug VolunteerTeams - Detected Volunteer from referrer');
+        sessionStorage.setItem('userType', 'volunteer');
+      }
+    }
+  }, []);
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   
@@ -387,9 +402,8 @@ const VolunteerTeams = () => {
                     <TableCell 
                       className="font-medium text-primary" 
                       onClick={() => {
-                        console.log('Debug VolunteerTeams - Setting userType to volunteer');
-                        sessionStorage.setItem('userType', 'volunteer');
-                        console.log('Debug VolunteerTeams - sessionStorage set:', sessionStorage.getItem('userType'));
+                        const userType = sessionStorage.getItem('userType') || 'volunteer';
+                        console.log('Debug VolunteerTeams - Current userType:', userType);
                         navigate(`/team-details/${team.id}`);
                       }}
                     >
