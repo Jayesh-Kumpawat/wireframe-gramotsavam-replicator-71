@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 const PlayerAddress = () => {
   const navigate = useNavigate();
@@ -30,6 +31,13 @@ const PlayerAddress = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-sm mx-auto">
+        <Button 
+          onClick={() => navigate(-1)} 
+          variant="ghost" 
+          className="mb-4 p-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
         <div className="border-2 border-foreground rounded-lg p-8">
           <h2 className="text-lg font-normal mb-2 text-center">Profile</h2>
           <h3 className="text-lg font-normal mb-6 text-center">Registration</h3>
