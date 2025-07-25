@@ -19,16 +19,13 @@ const TeamDetails = () => {
   
   useEffect(() => {
     // Check if navigated from volunteer-related pages
-    const referrer = document.referrer;
-    const currentPath = window.location.pathname;
-    const isFromVolunteer = referrer.includes('/volunteer-teams') || 
-                           window.history.state?.fromVolunteer ||
-                           sessionStorage.getItem('userType') === 'volunteer';
+    const userType = sessionStorage.getItem('userType');
+    const isFromVolunteer = userType === 'volunteer';
     setIsVolunteer(isFromVolunteer);
     
     // Clean up sessionStorage when component unmounts
     return () => {
-      if (sessionStorage.getItem('userType') === 'volunteer') {
+      if (sessionStorage.getItem('userType')) {
         sessionStorage.removeItem('userType');
       }
     };

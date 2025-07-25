@@ -81,7 +81,10 @@ const POCDashboard = () => {
                   key={sport}
                   variant="outline"
                   className="w-full justify-start text-base py-3"
-                  onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
+                  onClick={() => {
+                    sessionStorage.setItem('userType', 'poc');
+                    navigate(`/volunteer-teams/${sport.toLowerCase()}`);
+                  }}
                 >
                   {sport}
                 </Button>

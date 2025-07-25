@@ -99,7 +99,10 @@ const VolunteerDashboard = () => {
               <p className="text-sm text-muted-foreground">Select Sport</p>
             </CardHeader>
             <CardContent className="space-y-3">
-              {sports.map(sport => <Button key={sport} variant={sport === selectedSport ? "destructive" : "outline"} className="w-full justify-start text-base py-3" onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}>
+              {sports.map(sport => <Button key={sport} variant={sport === selectedSport ? "destructive" : "outline"} className="w-full justify-start text-base py-3" onClick={() => {
+                sessionStorage.setItem('userType', 'volunteer');
+                navigate(`/volunteer-teams/${sport.toLowerCase()}`);
+              }}>
                   {sport}
                 </Button>)}
               
