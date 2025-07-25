@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Bell, Home, Trophy, User } from "lucide-react";
+import { Bell, Home, Trophy, User, ArrowLeft } from "lucide-react";
 
 const PlayerDashboard = () => {
   const navigate = useNavigate();
@@ -46,7 +46,16 @@ const PlayerDashboard = () => {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b">
-        <h1 className="text-lg font-normal">Player Dashboard</h1>
+        <div className="flex items-center">
+          <Button 
+            onClick={() => navigate(-1)} 
+            variant="ghost" 
+            className="p-2 mr-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <h1 className="text-lg font-normal">Player Dashboard</h1>
+        </div>
         <div className="relative">
           <Bell 
             className="w-6 h-6 cursor-pointer" 
