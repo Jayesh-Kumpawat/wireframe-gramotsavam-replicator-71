@@ -6,7 +6,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -17,11 +17,39 @@ const CreateMatch = () => {
   const [firstTeam, setFirstTeam] = useState("");
   const [secondTeam, setSecondTeam] = useState("");
   const [matchDate, setMatchDate] = useState<Date>();
+  const [userType, setUserType] = useState<string>("poc");
+
+  useEffect(() => {
+    // Detect user type from various sources
+    const storedUserType = sessionStorage.getItem('userType');
+    const referrer = document.referrer;
+    
+    if (storedUserType) {
+      setUserType(storedUserType);
+    } else if (referrer.includes('/admin-')) {
+      setUserType('admin');
+      sessionStorage.setItem('userType', 'admin');
+    } else if (referrer.includes('/poc-')) {
+      setUserType('poc');
+      sessionStorage.setItem('userType', 'poc');
+    }
+  }, []);
+
+  const getMatchesRoute = () => {
+    switch (userType) {
+      case 'admin':
+        return '/admin-matches';
+      case 'poc':
+        return '/poc-matches';
+      default:
+        return '/poc-matches';
+    }
+  };
 
   const handleCreate = () => {
     // Handle match creation logic here
     console.log({ level, venue, firstTeam, secondTeam, matchDate });
-    navigate("/poc-matches");
+    navigate(getMatchesRoute());
   };
 
   return (
@@ -33,7 +61,7 @@ const CreateMatch = () => {
             <Button 
               variant="ghost" 
               size="sm" 
-              onClick={() => navigate("/poc-matches")}
+              onClick={() => navigate(getMatchesRoute())}
               className="p-1"
             >
               <ArrowLeft className="w-5 h-5" />
