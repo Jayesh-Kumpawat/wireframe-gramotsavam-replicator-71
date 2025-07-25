@@ -9,7 +9,7 @@ const AdminDashboard = () => {
     { title: "Team Registrations", icon: Users, action: () => console.log("Team Registrations") },
     { title: "Volunteer List", icon: Users, action: () => console.log("Volunteer List") },
     { title: "Levelwise Venues", icon: MapPin, action: () => navigate("/levelwise-venues") },
-    { title: "Reports & Dashboards", icon: BarChart3, action: () => console.log("Reports & Dashboards") },
+    { title: "Reports & Dashboards", icon: BarChart3, action: () => navigate("/reports-dashboards") },
   ];
 
   return (
