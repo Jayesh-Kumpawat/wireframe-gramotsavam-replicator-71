@@ -75,11 +75,7 @@ const VolunteerDashboard = () => {
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="space-y-6">
           {/* Back button */}
-          <Button 
-            onClick={() => navigate("/volunteer-otp")} 
-            variant="ghost" 
-            className="p-2"
-          >
+          <Button onClick={() => navigate("/volunteer-otp")} variant="ghost" className="p-2">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           
@@ -106,9 +102,7 @@ const VolunteerDashboard = () => {
               {sports.map(sport => <Button key={sport} variant={sport === selectedSport ? "destructive" : "outline"} className="w-full justify-start text-base py-3" onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}>
                   {sport}
                 </Button>)}
-              <Button variant="secondary" className="w-full mt-4 text-base py-3" onClick={() => navigate("/volunteer-team-creation")}>
-                Register New Team
-              </Button>
+              
             </CardContent>
           </Card>
 
