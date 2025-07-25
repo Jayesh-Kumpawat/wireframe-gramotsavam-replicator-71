@@ -150,7 +150,7 @@ const PlayerMatches = () => {
             <span className="text-xs text-blue-600">Matches</span>
           </button>
           
-          <button className="flex-1 flex flex-col items-center py-3" onClick={() => navigate("/player-profile")}>
+          <button className="flex-1 flex flex-col items-center py-3" onClick={() => navigate("/player-profile-view")}>
             <User className="w-5 h-5 mb-1" />
             <span className="text-xs">Profile</span>
           </button>
