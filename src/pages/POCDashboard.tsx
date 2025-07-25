@@ -79,7 +79,7 @@ const POCDashboard = () => {
               {sports.map((sport) => (
                 <Button
                   key={sport}
-                  variant={sport === "Throwball" ? "destructive" : "outline"}
+                  variant="outline"
                   className="w-full justify-start text-base py-3"
                   onClick={() => navigate(`/volunteer-teams/${sport.toLowerCase()}`)}
                 >
