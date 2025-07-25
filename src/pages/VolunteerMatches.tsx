@@ -179,7 +179,7 @@ const VolunteerMatches = () => {
                 <Trophy className="w-6 h-6 text-primary" />
                 <span className="text-sm mt-1 text-primary font-medium">Matches</span>
               </div>
-              <div className="flex-1 flex flex-col items-center py-4 cursor-pointer">
+              <div className="flex-1 flex flex-col items-center py-4 cursor-pointer" onClick={() => navigate("/volunteer-profile")}>
                 <UserCircle className="w-6 h-6" />
                 <span className="text-sm mt-1">Profile</span>
               </div>
