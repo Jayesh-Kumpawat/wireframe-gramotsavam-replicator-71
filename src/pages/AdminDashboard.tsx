@@ -81,10 +81,6 @@ const AdminDashboard = () => {
           {/* Bottom Navigation */}
           <div className="border-t bg-muted/30 w-80">
             <div className="flex">
-              <div className="flex-1 flex flex-col items-center py-4 bg-primary/10 border-r">
-                <Home className="w-6 h-6 text-primary" />
-                <span className="text-sm mt-1 text-primary font-medium">Home</span>
-              </div>
               <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer">
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Tournaments</span>
