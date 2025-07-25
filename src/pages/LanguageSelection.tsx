@@ -39,7 +39,9 @@ const LanguageSelection = () => {
             {languages.map(language => <Button key={language.english} onClick={() => handleLanguageSelect(language.english)} variant="outline" className="w-full justify-center px-4 py-2 text-center">
                 <div className="flex flex-col items-center">
                   <span>{language.english}</span>
-                  
+                  {language.english !== "English" && (
+                    <span className="text-blue-500 mt-1">{language.native}</span>
+                  )}
                 </div>
               </Button>)}
           </div>
