@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   const menuItems = [
     { title: "Team Registrations", icon: Users, action: () => console.log("Team Registrations") },
     { title: "Volunteer List", icon: Users, action: () => console.log("Volunteer List") },
-    { title: "Levelwise Venues", icon: MapPin, action: () => console.log("Levelwise Venues") },
+    { title: "Levelwise Venues", icon: MapPin, action: () => navigate("/levelwise-venues") },
     { title: "Reports & Dashboards", icon: BarChart3, action: () => console.log("Reports & Dashboards") },
   ];
 
