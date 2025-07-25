@@ -105,7 +105,7 @@ const POCDashboard = () => {
               </div>
               <div 
                 className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
-                onClick={() => navigate("/volunteer-matches")}
+                onClick={() => navigate("/poc-matches")}
               >
                 <Trophy className="w-6 h-6" />
                 <span className="text-sm mt-1">Matches</span>
