@@ -19,7 +19,19 @@ const VolunteerOTP = () => {
   }, [countdown]);
 
   const handleVerify = () => {
-    navigate("/volunteer-dashboard");
+    // Extract the last digit of the phone number
+    const lastDigit = phoneNumber.slice(-1);
+    
+    if (lastDigit === '1') {
+      navigate("/volunteer-dashboard");
+    } else if (lastDigit === '2') {
+      navigate("/poc-dashboard");
+    } else if (lastDigit === '3') {
+      navigate("/admin-dashboard");
+    } else {
+      // Default to volunteer dashboard for other numbers
+      navigate("/volunteer-dashboard");
+    }
   };
 
   const handleChangeNumber = () => {
