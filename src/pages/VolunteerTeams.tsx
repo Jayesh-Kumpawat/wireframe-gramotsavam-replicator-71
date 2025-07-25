@@ -199,7 +199,11 @@ const VolunteerTeams = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b p-4 flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={() => navigate("/volunteer-dashboard")}>
+        <Button variant="ghost" size="icon" onClick={() => {
+          const userType = sessionStorage.getItem('userType');
+          const dashboardRoute = userType === 'poc' ? '/poc-dashboard' : '/volunteer-dashboard';
+          navigate(dashboardRoute);
+        }}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <h1 className="text-2xl font-bold">Teams Registered - {sportName}</h1>
