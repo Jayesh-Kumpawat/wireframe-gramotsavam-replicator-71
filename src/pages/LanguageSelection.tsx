@@ -3,7 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 const LanguageSelection = () => {
   const navigate = useNavigate();
-  const languages = ["English", "Tamil", "Telugu", "Kannada", "Malayalam", "Odia"];
+  const languages = [
+    { english: "English", native: "English" },
+    { english: "Tamil", native: "தமிழ்" },
+    { english: "Telugu", native: "తెలుగు" },
+    { english: "Kannada", native: "ಕನ್ನಡ" },
+    { english: "Malayalam", native: "മലയാളം" },
+    { english: "Odia", native: "ଓଡ଼ିଆ" }
+  ];
   const handleLanguageSelect = (language: string) => {
     // Store selected language and navigate to login options
     navigate('/login');
@@ -22,9 +29,19 @@ const LanguageSelection = () => {
         <div className="border-2 border-foreground rounded-lg p-6 mb-8">
           <h2 className="text-lg font-normal mb-4 text-center">Choose Language</h2>
           <div className="space-y-2">
-            {languages.map(language => <Button key={language} onClick={() => handleLanguageSelect(language)} variant="outline" className="w-full justify-start px-4 py-2 text-left">
-                {language}
-              </Button>)}
+            {languages.map(language => (
+              <Button 
+                key={language.english} 
+                onClick={() => handleLanguageSelect(language.english)} 
+                variant="outline" 
+                className="w-full justify-start px-4 py-2 text-left"
+              >
+                <div className="flex flex-col items-start">
+                  <span>{language.english}</span>
+                  <span className="text-primary text-sm">{language.native}</span>
+                </div>
+              </Button>
+            ))}
           </div>
         </div>
         
