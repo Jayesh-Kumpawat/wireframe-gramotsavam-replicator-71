@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Search, Filter, MapPin, Plus, X } from "lucide-react";
+import { ArrowLeft, Search, Filter, MapPin, Plus, X, Home, Trophy, UserCircle } from "lucide-react";
 import { useState } from "react";
 
 const AdminMatches = () => {
@@ -187,6 +187,30 @@ const AdminMatches = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Bottom Navigation */}
+          <div className="mt-12 border-t bg-muted/30 rounded-lg">
+            <div className="flex">
+              <div 
+                className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer rounded-l-lg"
+                onClick={() => navigate("/admin-dashboard")}
+              >
+                <Home className="w-6 h-6" />
+                <span className="text-sm mt-1">Home</span>
+              </div>
+              <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer bg-blue-100">
+                <Trophy className="w-6 h-6 text-blue-600" />
+                <span className="text-sm mt-1 text-blue-600">Matches</span>
+              </div>
+              <div 
+                className="flex-1 flex flex-col items-center py-4 cursor-pointer rounded-r-lg"
+                onClick={() => navigate("/admin-profile")}
+              >
+                <UserCircle className="w-6 h-6" />
+                <span className="text-sm mt-1">Profile</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

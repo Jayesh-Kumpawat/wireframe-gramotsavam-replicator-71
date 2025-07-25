@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft, Plus, Home, Trophy, UserCircle } from "lucide-react";
 import { useState } from "react";
 
 const AdminProfile = () => {
@@ -100,6 +100,33 @@ const AdminProfile = () => {
                 placeholder="Enter Instagram handle"
                 className="w-full"
               />
+            </div>
+
+            {/* Bottom Navigation */}
+            <div className="mt-12 border-t bg-muted/30 rounded-lg">
+              <div className="flex">
+                <div 
+                  className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer rounded-l-lg"
+                  onClick={() => navigate("/admin-dashboard")}
+                >
+                  <Home className="w-6 h-6" />
+                  <span className="text-sm mt-1">Home</span>
+                </div>
+                <div 
+                  className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
+                  onClick={() => {
+                    sessionStorage.setItem('userType', 'admin');
+                    navigate("/admin-matches");
+                  }}
+                >
+                  <Trophy className="w-6 h-6" />
+                  <span className="text-sm mt-1">Matches</span>
+                </div>
+                <div className="flex-1 flex flex-col items-center py-4 cursor-pointer bg-blue-100 rounded-r-lg">
+                  <UserCircle className="w-6 h-6 text-blue-600" />
+                  <span className="text-sm mt-1 text-blue-600">Profile</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
