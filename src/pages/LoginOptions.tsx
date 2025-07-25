@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 const LoginOptions = () => {
   const navigate = useNavigate();
   const handlePlayerLogin = () => {
@@ -10,6 +11,14 @@ const LoginOptions = () => {
   };
   return <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-sm mx-auto">
+        {/* Back button */}
+        <Button 
+          onClick={() => navigate(-1)} 
+          variant="ghost" 
+          className="mb-4 p-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
         {/* Login options container */}
         <div className="border-2 border-foreground rounded-lg p-8 mb-8 text-center">
           <h2 className="text-lg font-normal mb-6">Login</h2>
