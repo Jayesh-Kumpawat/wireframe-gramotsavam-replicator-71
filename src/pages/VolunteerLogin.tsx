@@ -9,7 +9,7 @@ const VolunteerLogin = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleContinue = () => {
-    navigate("/volunteer-otp", { state: { phoneNumber } });
+    navigate("/admin-dashboard");
   };
 
   const handleGoogleLogin = () => {
