@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
-import { Bell, Search, Home, Trophy, UserCircle, Filter, X } from "lucide-react";
+import { Bell, Search, Home, Trophy, UserCircle, Filter, X, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 const VolunteerDashboard = () => {
   const navigate = useNavigate();
@@ -74,7 +74,14 @@ const VolunteerDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="space-y-6">
-          
+          {/* Back button */}
+          <Button 
+            onClick={() => navigate(-1)} 
+            variant="ghost" 
+            className="p-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
           
           <Card className="mb-6 w-80">
             <CardHeader className="pb-3">
