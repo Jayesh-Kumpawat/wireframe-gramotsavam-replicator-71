@@ -21,7 +21,7 @@ const CreateMatch = () => {
   const handleCreate = () => {
     // Handle match creation logic here
     console.log({ level, venue, firstTeam, secondTeam, matchDate });
-    navigate("/volunteer-matches");
+    navigate("/poc-matches");
   };
 
   return (
@@ -33,7 +33,7 @@ const CreateMatch = () => {
             <Button 
               variant="ghost" 
               size="sm" 
-              onClick={() => navigate("/volunteer-matches")}
+              onClick={() => navigate("/poc-matches")}
               className="p-1"
             >
               <ArrowLeft className="w-5 h-5" />
