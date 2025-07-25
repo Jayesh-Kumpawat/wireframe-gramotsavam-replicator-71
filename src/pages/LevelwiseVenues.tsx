@@ -2,9 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Filter } from "lucide-react";
+import { useState } from "react";
+import FiltersModal from "@/components/FiltersModal";
+import AssignVenueModal from "@/components/AssignVenueModal";
 
 const LevelwiseVenues = () => {
   const navigate = useNavigate();
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [assignVenueOpen, setAssignVenueOpen] = useState(false);
 
   const venueData = [
     { level: "Level", levelName: "Level Name", venue: "Venue" },
@@ -35,12 +40,19 @@ const LevelwiseVenues = () => {
               placeholder="Search by name"
               className="max-w-sm"
             />
-            <Button variant="outline" size="icon">
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setFiltersOpen(true)}
+            >
               <Filter className="h-4 w-4" />
             </Button>
           </div>
           
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+          <Button 
+            className="bg-blue-500 hover:bg-blue-600 text-white"
+            onClick={() => setAssignVenueOpen(true)}
+          >
             Assign Venue
           </Button>
         </div>
@@ -68,6 +80,10 @@ const LevelwiseVenues = () => {
             </table>
           </div>
         </div>
+
+        {/* Modals */}
+        <FiltersModal open={filtersOpen} onOpenChange={setFiltersOpen} />
+        <AssignVenueModal open={assignVenueOpen} onOpenChange={setAssignVenueOpen} />
       </div>
     </div>
   );
