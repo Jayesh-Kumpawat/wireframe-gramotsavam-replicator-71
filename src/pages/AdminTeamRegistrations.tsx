@@ -189,7 +189,7 @@ const AdminTeamRegistrations = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b p-4 flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={() => navigate("/admin-dashboard")}>
+        <Button variant="ghost" size="icon" onClick={() => navigate("/admin-team-selection")}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <h1 className="text-2xl font-bold">Teams Registered - {sportName}</h1>
