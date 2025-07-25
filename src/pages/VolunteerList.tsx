@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Filter } from "lucide-react";
 import { useState } from "react";
@@ -12,14 +13,6 @@ const VolunteerList = () => {
   const [assignLevelOpen, setAssignLevelOpen] = useState(false);
 
   const volunteerData = [
-    {
-      name: "Name",
-      mobNo: "Mob No.",
-      levelAssignment: "Level Assignment",
-      district: "District",
-      block: "Block",
-      state: "State"
-    },
     {
       name: "John Smith",
       mobNo: "98xxx",
@@ -86,6 +79,9 @@ const VolunteerList = () => {
             <table className="w-full">
               <thead className="border-b bg-muted/50">
                 <tr>
+                  <th className="text-left p-4 font-medium min-w-[60px]">
+                    <Checkbox />
+                  </th>
                   <th className="text-left p-4 font-medium min-w-[120px]">Name</th>
                   <th className="text-left p-4 font-medium min-w-[100px]">Mob No.</th>
                   <th className="text-left p-4 font-medium min-w-[150px]">Level Assignment</th>
@@ -96,7 +92,10 @@ const VolunteerList = () => {
               </thead>
               <tbody>
                 {volunteerData.map((row, index) => (
-                  <tr key={index} className={index === 0 ? "border-b font-medium" : "border-b"}>
+                  <tr key={index} className="border-b">
+                    <td className="p-4">
+                      <Checkbox />
+                    </td>
                     <td className="p-4">{row.name}</td>
                     <td className="p-4">{row.mobNo}</td>
                     <td className="p-4">{row.levelAssignment}</td>
