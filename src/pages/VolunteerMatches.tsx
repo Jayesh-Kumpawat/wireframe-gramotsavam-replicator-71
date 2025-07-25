@@ -8,7 +8,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, Filter, MapPin, Home, Trophy, UserCircle, Plus, X } from "lucide-react";
 import { useState } from "react";
-
 const VolunteerMatches = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,65 +20,48 @@ const VolunteerMatches = () => {
   });
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
-
-  const matches = [
-    {
-      id: 1,
-      teamA: "Team A",
-      teamB: "Team B",
-      level: "Division",
-      scheduledDate: "3/01/25",
-      venue: "Coimbatore",
-      status: "scheduled"
-    },
-    {
-      id: 2,
-      teamA: "Team A",
-      teamB: "Team C",
-      level: "Cluster",
-      score: "25 - 23",
-      venue: "IYC",
-      status: "completed"
-    },
-    {
-      id: 3,
-      teamA: "Team D",
-      teamB: "Team E",
-      level: "Division",
-      scheduledDate: "5/01/25",
-      venue: "Chennai",
-      status: "scheduled"
-    }
-  ];
-
+  const matches = [{
+    id: 1,
+    teamA: "Team A",
+    teamB: "Team B",
+    level: "Division",
+    scheduledDate: "3/01/25",
+    venue: "Coimbatore",
+    status: "scheduled"
+  }, {
+    id: 2,
+    teamA: "Team A",
+    teamB: "Team C",
+    level: "Cluster",
+    score: "25 - 23",
+    venue: "IYC",
+    status: "completed"
+  }, {
+    id: 3,
+    teamA: "Team D",
+    teamB: "Team E",
+    level: "Division",
+    scheduledDate: "5/01/25",
+    venue: "Chennai",
+    status: "scheduled"
+  }];
   const handleLevelChange = (level: string, checked: boolean) => {
-    setSelectedLevels(prev => ({ ...prev, [level]: checked }));
+    setSelectedLevels(prev => ({
+      ...prev,
+      [level]: checked
+    }));
   };
-
   const filteredMatches = matches.filter(match => {
-    const matchesSearch = match.teamA.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      match.teamB.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesLevel = Object.keys(selectedLevels).every(level => 
-      !selectedLevels[level as keyof typeof selectedLevels] || 
-      match.level.toLowerCase() === level
-    );
-    
+    const matchesSearch = match.teamA.toLowerCase().includes(searchQuery.toLowerCase()) || match.teamB.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesLevel = Object.keys(selectedLevels).every(level => !selectedLevels[level as keyof typeof selectedLevels] || match.level.toLowerCase() === level);
     return matchesSearch && matchesLevel;
   });
-
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
+  return <div className="min-h-screen bg-background flex flex-col">
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-80 space-y-4">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => navigate("/volunteer-dashboard")}
-              className="p-1"
-            >
+            <Button variant="ghost" size="sm" onClick={() => navigate("/volunteer-dashboard")} className="p-1">
               <ArrowLeft className="w-5 h-5" />
             </Button>
             <div>
@@ -92,12 +74,7 @@ const VolunteerMatches = () => {
           <div className="flex gap-2 mb-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by team name"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
+              <Input placeholder="Search by team name" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-10" />
             </div>
             <Dialog open={showFilters} onOpenChange={setShowFilters}>
               <DialogTrigger asChild>
@@ -109,11 +86,7 @@ const VolunteerMatches = () => {
                 <DialogHeader>
                   <div className="flex items-center justify-between">
                     <DialogTitle>Filters</DialogTitle>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setShowFilters(false)}
-                    >
+                    <Button variant="ghost" size="icon" onClick={() => setShowFilters(false)}>
                       <X className="w-4 h-4" />
                     </Button>
                   </div>
@@ -123,18 +96,12 @@ const VolunteerMatches = () => {
                   <div>
                     <label className="text-sm font-medium mb-3 block">Level</label>
                     <div className="space-y-2">
-                      {Object.entries(selectedLevels).map(([level, checked]) => (
-                        <div key={level} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={level}
-                            checked={checked}
-                            onCheckedChange={(checked) => handleLevelChange(level, checked as boolean)}
-                          />
+                      {Object.entries(selectedLevels).map(([level, checked]) => <div key={level} className="flex items-center space-x-2">
+                          <Checkbox id={level} checked={checked} onCheckedChange={checked => handleLevelChange(level, checked as boolean)} />
                           <label htmlFor={level} className="text-sm capitalize">
                             {level}
                           </label>
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </div>
 
@@ -170,44 +137,26 @@ const VolunteerMatches = () => {
                 </div>
               </DialogContent>
             </Dialog>
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={() => navigate("/create-match")}
-            >
-              <Plus className="w-4 h-4" />
-            </Button>
+            
           </div>
 
           {/* Matches List */}
           <div className="space-y-3">
-            {filteredMatches.map((match) => (
-              <Card 
-                key={match.id} 
-                className="p-4 cursor-pointer hover:bg-muted/50 transition-colors"
-                onClick={() => navigate(`/match-details/${match.id}`)}
-              >
+            {filteredMatches.map(match => <Card key={match.id} className="p-4 cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => navigate(`/match-details/${match.id}`)}>
                 <CardContent className="p-0">
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex-1">
                       <div className="font-medium text-sm">
                         {match.teamA} vs {match.teamB}
                       </div>
-                      {match.status === "scheduled" && (
-                        <div className="text-xs text-muted-foreground mt-1">
+                      {match.status === "scheduled" && <div className="text-xs text-muted-foreground mt-1">
                           scheduled on {match.scheduledDate}
-                        </div>
-                      )}
-                      {match.status === "completed" && match.score && (
-                        <div className="text-lg font-bold mt-1">
+                        </div>}
+                      {match.status === "completed" && match.score && <div className="text-lg font-bold mt-1">
                           {match.score}
-                        </div>
-                      )}
+                        </div>}
                     </div>
-                    <Badge 
-                      variant={match.level === "Division" ? "default" : "secondary"}
-                      className="text-xs"
-                    >
+                    <Badge variant={match.level === "Division" ? "default" : "secondary"} className="text-xs">
                       {match.level}
                     </Badge>
                   </div>
@@ -216,17 +165,13 @@ const VolunteerMatches = () => {
                     {match.venue}
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           {/* Bottom Navigation */}
           <div className="border-t bg-muted/30 mt-8">
             <div className="flex">
-              <div 
-                className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer"
-                onClick={() => navigate("/volunteer-dashboard")}
-              >
+              <div className="flex-1 flex flex-col items-center py-4 border-r cursor-pointer" onClick={() => navigate("/volunteer-dashboard")}>
                 <Home className="w-6 h-6" />
                 <span className="text-sm mt-1">Home</span>
               </div>
@@ -242,8 +187,6 @@ const VolunteerMatches = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default VolunteerMatches;
