@@ -387,7 +387,9 @@ const VolunteerTeams = () => {
                     <TableCell 
                       className="font-medium text-primary" 
                       onClick={() => {
+                        console.log('Debug VolunteerTeams - Setting userType to volunteer');
                         sessionStorage.setItem('userType', 'volunteer');
+                        console.log('Debug VolunteerTeams - sessionStorage set:', sessionStorage.getItem('userType'));
                         navigate(`/team-details/${team.id}`);
                       }}
                     >

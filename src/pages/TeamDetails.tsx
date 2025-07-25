@@ -18,17 +18,24 @@ const TeamDetails = () => {
   const [isVolunteer, setIsVolunteer] = useState(false);
   
   useEffect(() => {
-    // Check if navigated from volunteer-related pages
+    // Check multiple indicators to determine if user is a volunteer
     const userType = sessionStorage.getItem('userType');
-    const isFromVolunteer = userType === 'volunteer';
-    setIsVolunteer(isFromVolunteer);
+    const referrer = document.referrer;
     
-    // Clean up sessionStorage when component unmounts
-    return () => {
-      if (sessionStorage.getItem('userType')) {
-        sessionStorage.removeItem('userType');
-      }
-    };
+    console.log('Debug TeamDetails - userType from sessionStorage:', userType);
+    console.log('Debug TeamDetails - document.referrer:', referrer);
+    
+    // Check if coming from volunteer-specific pages
+    const isFromVolunteerTeams = referrer.includes('/volunteer-teams');
+    const isFromVolunteerDashboard = referrer.includes('/volunteer-dashboard');
+    const isFromVolunteerMatches = referrer.includes('/volunteer-matches');
+    const isVolunteerByStorage = userType === 'volunteer';
+    
+    // If no clear indicator and no storage, default to POC (safer to show actions than hide them)
+    const isFromVolunteer = isVolunteerByStorage || (isFromVolunteerTeams || isFromVolunteerDashboard || isFromVolunteerMatches);
+    
+    console.log('Debug TeamDetails - isFromVolunteer:', isFromVolunteer);
+    setIsVolunteer(isFromVolunteer);
   }, []);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [statusFilters, setStatusFilters] = useState({
