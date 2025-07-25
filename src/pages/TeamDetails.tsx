@@ -231,7 +231,7 @@ const TeamDetails = () => {
                       <TableCell>
                         <input type="checkbox" checked={selectedPlayer === player.name} onChange={() => setSelectedPlayer(selectedPlayer === player.name ? null : player.name)} className="rounded" />
                       </TableCell>
-                      <TableCell className={`font-medium cursor-pointer ${player.name === "Player 2" ? "text-primary bg-primary/10" : ""}`} onClick={() => navigate("/player-profile-creation")}>
+                      <TableCell className={`font-medium cursor-pointer ${player.name === "Player 2" ? "text-primary bg-primary/10" : ""}`} onClick={() => navigate("/player-profile-view")}>
                         {player.name}
                       </TableCell>
                       <TableCell>
