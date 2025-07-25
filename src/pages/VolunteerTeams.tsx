@@ -386,7 +386,10 @@ const VolunteerTeams = () => {
                   <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
                     <TableCell 
                       className="font-medium text-primary" 
-                      onClick={() => navigate(`/team-details/${team.id}`)}
+                      onClick={() => {
+                        sessionStorage.setItem('userType', 'volunteer');
+                        navigate(`/team-details/${team.id}`);
+                      }}
                     >
                       {team.name}
                     </TableCell>

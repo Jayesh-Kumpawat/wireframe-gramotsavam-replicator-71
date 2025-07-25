@@ -7,12 +7,32 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, User, Settings, Eye, Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const TeamDetails = () => {
   const navigate = useNavigate();
   const {
     teamId
   } = useParams();
+  
+  // Check if user is a volunteer by checking the referrer or navigation history
+  const [isVolunteer, setIsVolunteer] = useState(false);
+  
+  useEffect(() => {
+    // Check if navigated from volunteer-related pages
+    const referrer = document.referrer;
+    const currentPath = window.location.pathname;
+    const isFromVolunteer = referrer.includes('/volunteer-teams') || 
+                           window.history.state?.fromVolunteer ||
+                           sessionStorage.getItem('userType') === 'volunteer';
+    setIsVolunteer(isFromVolunteer);
+    
+    // Clean up sessionStorage when component unmounts
+    return () => {
+      if (sessionStorage.getItem('userType') === 'volunteer') {
+        sessionStorage.removeItem('userType');
+      }
+    };
+  }, []);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [statusFilters, setStatusFilters] = useState({
     verified: false,
@@ -199,7 +219,7 @@ const TeamDetails = () => {
                     <TableHead>Player Name</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Position</TableHead>
-                    <TableHead>Actions</TableHead>
+                    {!isVolunteer && <TableHead>Actions</TableHead>}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -216,11 +236,13 @@ const TeamDetails = () => {
                         </Badge>
                       </TableCell>
                       <TableCell>{player.position}</TableCell>
-                      <TableCell>
-                        <Button variant="ghost" size="sm" onClick={() => navigate("/player-profile-view")}>
-                          <Eye className="w-4 h-4" />
-                        </Button>
-                      </TableCell>
+                      {!isVolunteer && (
+                        <TableCell>
+                          <Button variant="ghost" size="sm" onClick={() => navigate("/player-profile-view")}>
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                        </TableCell>
+                      )}
                     </TableRow>)}
                 </TableBody>
               </Table>
