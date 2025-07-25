@@ -8,6 +8,13 @@ const MatchDetails = () => {
   const navigate = useNavigate();
   const { matchId } = useParams();
 
+  // Determine which matches page to navigate back to based on user type
+  const handleBackNavigation = () => {
+    const userType = sessionStorage.getItem('userType');
+    const matchesRoute = userType === 'poc' ? '/poc-matches' : '/volunteer-matches';
+    navigate(matchesRoute);
+  };
+
   // Mock data - in real app this would come from API based on matchId
   const matchData = {
     id: matchId,
@@ -42,7 +49,7 @@ const MatchDetails = () => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => navigate("/volunteer-matches")}
+                onClick={handleBackNavigation}
                 className="p-1"
               >
                 <ArrowLeft className="w-5 h-5" />
