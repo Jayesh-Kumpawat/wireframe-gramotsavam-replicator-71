@@ -1,12 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Edit, MapPin } from "lucide-react";
+import { ArrowLeft, Edit, MapPin, Upload } from "lucide-react";
+import { useState } from "react";
 
 const MatchDetails = () => {
   const navigate = useNavigate();
   const { matchId } = useParams();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [location, setLocation] = useState("");
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleSubmitMedia = () => {
+    if (selectedFile) {
+      // Handle media upload logic here
+      console.log("Uploading file:", selectedFile.name);
+      console.log("Location:", location);
+      // Reset form
+      setSelectedFile(null);
+      setLocation("");
+    }
+  };
 
   // Determine which matches page to navigate back to based on user type
   const handleBackNavigation = () => {
@@ -152,6 +176,69 @@ const MatchDetails = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Upload Media Button */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="w-full">
+                <Upload className="w-4 h-4 mr-2" />
+                Upload Media
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>Upload Media</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="text-center">
+                  <h3 className="font-medium">{matchData.teamA.name} vs {matchData.teamB.name}</h3>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="date">Date</Label>
+                  <Input
+                    id="date"
+                    value={matchData.scheduledDate}
+                    readOnly
+                    className="bg-muted"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="location">Location</Label>
+                  <Input
+                    id="location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Enter location"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="file">Upload</Label>
+                  <Input
+                    id="file"
+                    type="file"
+                    onChange={handleFileChange}
+                    accept="image/*,video/*"
+                  />
+                  {selectedFile && (
+                    <p className="text-sm text-muted-foreground">
+                      Selected: {selectedFile.name}
+                    </p>
+                  )}
+                </div>
+
+                <Button 
+                  onClick={handleSubmitMedia} 
+                  className="w-full"
+                  disabled={!selectedFile}
+                >
+                  Submit
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
