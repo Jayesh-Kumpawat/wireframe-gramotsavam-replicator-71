@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Search, Filter, X } from "lucide-react";
 import { useState } from "react";
@@ -190,237 +191,229 @@ const VolunteerTeams = () => {
       </div>
 
       <div className="p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Teams Table */}
-          <div className={showFilters ? "lg:col-span-2" : "lg:col-span-3"}>
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Teams - {sportName}</CardTitle>
-                  <div className="flex items-center gap-2">
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
-                      <Input 
-                        placeholder="Search teams..." 
-                        value={searchQuery} 
-                        onChange={e => setSearchQuery(e.target.value)} 
-                        className="pl-10" 
-                      />
-                    </div>
-                    <Button variant="outline" size="icon" onClick={() => setShowFilters(!showFilters)}>
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Teams - {sportName}</CardTitle>
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
+                  <Input 
+                    placeholder="Search teams..." 
+                    value={searchQuery} 
+                    onChange={e => setSearchQuery(e.target.value)} 
+                    className="pl-10" 
+                  />
+                </div>
+                <Sheet open={showFilters} onOpenChange={setShowFilters}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" size="icon">
                       <Filter className="w-4 h-4" />
                     </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Team Name</TableHead>
-                        <TableHead>Captain</TableHead>
-                        <TableHead>Cluster</TableHead>
-                        <TableHead>Division</TableHead>
-                        <TableHead>Current Level</TableHead>
-                        <TableHead>Status</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                  <TableBody>
-                    {filteredTeams.map(team => (
-                      <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
-                        <TableCell 
-                          className="font-medium text-primary" 
-                          onClick={() => navigate(`/team-details/${team.id}`)}
-                        >
-                          {team.name}
-                        </TableCell>
-                        <TableCell>{team.captain}</TableCell>
-                        <TableCell>{team.cluster}</TableCell>
-                        <TableCell>{team.division}</TableCell>
-                        <TableCell>
-                          <Badge variant={team.currentLevel === "Finals" ? "destructive" : team.currentLevel === "Division" ? "default" : "secondary"}>
-                            {team.currentLevel}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
-                            {team.status}
-                          </Badge>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-                {filteredTeams.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground">
-                    No teams found for {sportName}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-80">
+                    <SheetHeader>
+                      <SheetTitle>Filters</SheetTitle>
+                      <SheetDescription>
+                        Filter teams by level, status, cluster, and division
+                      </SheetDescription>
+                    </SheetHeader>
+                    
+                    <div className="mt-6 space-y-6">
+                      <div>
+                        <h4 className="font-medium mb-3">Current Level</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="cluster-level" 
+                              checked={selectedLevels.cluster} 
+                              onCheckedChange={checked => handleLevelChange("cluster", checked as boolean)} 
+                            />
+                            <label htmlFor="cluster-level" className="text-sm cursor-pointer">
+                              Cluster
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="division-level" 
+                              checked={selectedLevels.division} 
+                              onCheckedChange={checked => handleLevelChange("division", checked as boolean)} 
+                            />
+                            <label htmlFor="division-level" className="text-sm cursor-pointer">
+                              Division
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="finals-level" 
+                              checked={selectedLevels.finals} 
+                              onCheckedChange={checked => handleLevelChange("finals", checked as boolean)} 
+                            />
+                            <label htmlFor="finals-level" className="text-sm cursor-pointer">
+                              Finals
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-          {/* Filters Panel */}
-          {showFilters && (
-            <div className="lg:col-span-1">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>Filters</CardTitle>
-                    <Button variant="ghost" size="icon" onClick={() => setShowFilters(false)}>
-                      <X className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-3">Current Level</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="cluster-level" 
-                          checked={selectedLevels.cluster} 
-                          onCheckedChange={checked => handleLevelChange("cluster", checked as boolean)} 
-                        />
-                        <label htmlFor="cluster-level" className="text-sm cursor-pointer">
-                          Cluster
-                        </label>
+                      <div>
+                        <h4 className="font-medium mb-3">Status</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="verified" 
+                              checked={selectedStatus.verified} 
+                              onCheckedChange={checked => handleStatusChange("verified", checked as boolean)} 
+                            />
+                            <label htmlFor="verified" className="text-sm cursor-pointer">
+                              Verified
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="registered" 
+                              checked={selectedStatus.registered} 
+                              onCheckedChange={checked => handleStatusChange("registered", checked as boolean)} 
+                            />
+                            <label htmlFor="registered" className="text-sm cursor-pointer">
+                              Registered
+                            </label>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="division-level" 
-                          checked={selectedLevels.division} 
-                          onCheckedChange={checked => handleLevelChange("division", checked as boolean)} 
-                        />
-                        <label htmlFor="division-level" className="text-sm cursor-pointer">
-                          Division
-                        </label>
+
+                      <div>
+                        <h4 className="font-medium mb-3">Cluster</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="tiruppur" 
+                              checked={selectedClusters.tiruppur} 
+                              onCheckedChange={checked => handleClusterChange("tiruppur", checked as boolean)} 
+                            />
+                            <label htmlFor="tiruppur" className="text-sm cursor-pointer">
+                              Tiruppur
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="alandurai" 
+                              checked={selectedClusters.alandurai} 
+                              onCheckedChange={checked => handleClusterChange("alandurai", checked as boolean)} 
+                            />
+                            <label htmlFor="alandurai" className="text-sm cursor-pointer">
+                              Alandurai
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="coimbatore-cluster" 
+                              checked={selectedClusters.coimbatore} 
+                              onCheckedChange={checked => handleClusterChange("coimbatore", checked as boolean)} 
+                            />
+                            <label htmlFor="coimbatore-cluster" className="text-sm cursor-pointer">
+                              Coimbatore
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="erode" 
+                              checked={selectedClusters.erode} 
+                              onCheckedChange={checked => handleClusterChange("erode", checked as boolean)} 
+                            />
+                            <label htmlFor="erode" className="text-sm cursor-pointer">
+                              Erode
+                            </label>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="finals-level" 
-                          checked={selectedLevels.finals} 
-                          onCheckedChange={checked => handleLevelChange("finals", checked as boolean)} 
-                        />
-                        <label htmlFor="finals-level" className="text-sm cursor-pointer">
-                          Finals
-                        </label>
+
+                      <div>
+                        <h4 className="font-medium mb-3">Division</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="coimbatore-division" 
+                              checked={selectedDivisions.coimbatore} 
+                              onCheckedChange={checked => handleDivisionChange("coimbatore", checked as boolean)} 
+                            />
+                            <label htmlFor="coimbatore-division" className="text-sm cursor-pointer">
+                              Coimbatore
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="tiruppur-division" 
+                              checked={selectedDivisions.tiruppur} 
+                              onCheckedChange={checked => handleDivisionChange("tiruppur", checked as boolean)} 
+                            />
+                            <label htmlFor="tiruppur-division" className="text-sm cursor-pointer">
+                              Tiruppur
+                            </label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="salem-division" 
+                              checked={selectedDivisions.salem} 
+                              onCheckedChange={checked => handleDivisionChange("salem", checked as boolean)} 
+                            />
+                            <label htmlFor="salem-division" className="text-sm cursor-pointer">
+                              Salem
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-medium mb-3">Status</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="verified" 
-                          checked={selectedStatus.verified} 
-                          onCheckedChange={checked => handleStatusChange("verified", checked as boolean)} 
-                        />
-                        <label htmlFor="verified" className="text-sm cursor-pointer">
-                          Verified
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="registered" 
-                          checked={selectedStatus.registered} 
-                          onCheckedChange={checked => handleStatusChange("registered", checked as boolean)} 
-                        />
-                        <label htmlFor="registered" className="text-sm cursor-pointer">
-                          Registered
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-medium mb-3">Cluster</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="tiruppur" 
-                          checked={selectedClusters.tiruppur} 
-                          onCheckedChange={checked => handleClusterChange("tiruppur", checked as boolean)} 
-                        />
-                        <label htmlFor="tiruppur" className="text-sm cursor-pointer">
-                          Tiruppur
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="alandurai" 
-                          checked={selectedClusters.alandurai} 
-                          onCheckedChange={checked => handleClusterChange("alandurai", checked as boolean)} 
-                        />
-                        <label htmlFor="alandurai" className="text-sm cursor-pointer">
-                          Alandurai
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="coimbatore-cluster" 
-                          checked={selectedClusters.coimbatore} 
-                          onCheckedChange={checked => handleClusterChange("coimbatore", checked as boolean)} 
-                        />
-                        <label htmlFor="coimbatore-cluster" className="text-sm cursor-pointer">
-                          Coimbatore
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="erode" 
-                          checked={selectedClusters.erode} 
-                          onCheckedChange={checked => handleClusterChange("erode", checked as boolean)} 
-                        />
-                        <label htmlFor="erode" className="text-sm cursor-pointer">
-                          Erode
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-medium mb-3">Division</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="coimbatore-division" 
-                          checked={selectedDivisions.coimbatore} 
-                          onCheckedChange={checked => handleDivisionChange("coimbatore", checked as boolean)} 
-                        />
-                        <label htmlFor="coimbatore-division" className="text-sm cursor-pointer">
-                          Coimbatore
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="tiruppur-division" 
-                          checked={selectedDivisions.tiruppur} 
-                          onCheckedChange={checked => handleDivisionChange("tiruppur", checked as boolean)} 
-                        />
-                        <label htmlFor="tiruppur-division" className="text-sm cursor-pointer">
-                          Tiruppur
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="salem-division" 
-                          checked={selectedDivisions.salem} 
-                          onCheckedChange={checked => handleDivisionChange("salem", checked as boolean)} 
-                        />
-                        <label htmlFor="salem-division" className="text-sm cursor-pointer">
-                          Salem
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
-          )}
-        </div>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Team Name</TableHead>
+                  <TableHead>Captain</TableHead>
+                  <TableHead>Cluster</TableHead>
+                  <TableHead>Division</TableHead>
+                  <TableHead>Current Level</TableHead>
+                  <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredTeams.map(team => (
+                  <TableRow key={team.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableCell 
+                      className="font-medium text-primary" 
+                      onClick={() => navigate(`/team-details/${team.id}`)}
+                    >
+                      {team.name}
+                    </TableCell>
+                    <TableCell>{team.captain}</TableCell>
+                    <TableCell>{team.cluster}</TableCell>
+                    <TableCell>{team.division}</TableCell>
+                    <TableCell>
+                      <Badge variant={team.currentLevel === "Finals" ? "destructive" : team.currentLevel === "Division" ? "default" : "secondary"}>
+                        {team.currentLevel}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={team.status === "Verified" ? "default" : "secondary"}>
+                        {team.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            {filteredTeams.length === 0 && (
+              <div className="text-center py-8 text-muted-foreground">
+                No teams found for {sportName}
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
