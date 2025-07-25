@@ -43,6 +43,7 @@ import POCProfile from "./pages/POCProfile";
 import AdminDashboard from "./pages/AdminDashboard";
 import LevelwiseVenues from "./pages/LevelwiseVenues";
 import ReportsDashboards from "./pages/ReportsDashboards";
+import VolunteerList from "./pages/VolunteerList";
 import TeamDetails from "./pages/TeamDetails";
 import NotFound from "./pages/NotFound";
 
@@ -86,6 +87,7 @@ const App = () => (
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/levelwise-venues" element={<LevelwiseVenues />} />
           <Route path="/reports-dashboards" element={<ReportsDashboards />} />
+          <Route path="/volunteer-list" element={<VolunteerList />} />
           <Route path="/volunteer-matches" element={<VolunteerMatches />} />
           <Route path="/poc-matches" element={<POCMatches />} />
           <Route path="/poc-profile" element={<POCProfile />} />
