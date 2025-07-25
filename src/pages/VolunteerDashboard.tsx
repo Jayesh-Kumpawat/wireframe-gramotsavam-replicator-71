@@ -76,7 +76,7 @@ const VolunteerDashboard = () => {
         <div className="space-y-6">
           {/* Back button */}
           <Button 
-            onClick={() => navigate(-1)} 
+            onClick={() => navigate("/volunteer-otp")} 
             variant="ghost" 
             className="p-2"
           >
