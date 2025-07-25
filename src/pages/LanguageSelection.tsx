@@ -34,9 +34,9 @@ const LanguageSelection = () => {
                 key={language.english} 
                 onClick={() => handleLanguageSelect(language.english)} 
                 variant="outline" 
-                className="w-full justify-start px-4 py-2 text-left"
+                className="w-full justify-center px-4 py-2 text-center"
               >
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col items-center">
                   <span>{language.english}</span>
                   <span className="text-primary text-sm">{language.native}</span>
                 </div>
