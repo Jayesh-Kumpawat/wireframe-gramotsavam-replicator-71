@@ -25,7 +25,7 @@ const VolunteerLogin = () => {
       <div className="w-full max-w-sm mx-auto">
         {/* Back button */}
         <Button 
-          onClick={() => navigate(-1)} 
+          onClick={() => navigate("/login-options")} 
           variant="ghost" 
           className="mb-4 p-2"
         >
